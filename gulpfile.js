@@ -18,16 +18,6 @@ const b = browserify('./app/scripts/index.jsx', {debug: true})
   .transform('babelify', {
     presets: ['es2015', 'react'],
   });
-b.on('log', gutil.log);
-
-function bundler(b) {
-  return b
-    .bundle()
-    .on('error', logCompilationError)
-    .pipe(source('index.js'))
-    .pipe(buffer())
-    .pipe(gulp.dest('./dist/scripts'))
-}
 
 function logCompilationError(err) {
   gutil.log(gutil.colors.bgRed(
@@ -42,7 +32,14 @@ function logCompilationError(err) {
 /****************************************************/
 // asset compilation tasks
 /****************************************************/
-gulp.task('browserify', () => bundler(b));
+gulp.task('browserify', () => {
+  return b
+    .bundle()
+    .on('error', logCompilationError)
+    .pipe(source('index.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest('./dist/scripts'));
+});
 
 gulp.task('lint', () => {
   return gulp.src('./app/scripts/**/*.{js,jsx}')
