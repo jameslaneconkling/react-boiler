@@ -51,13 +51,12 @@ gulp.task('lint', () => {
 });
 
 gulp.task('move', () => {
-  gulp.src([
-    './app/*.{html,txt}'
-  ])
-    .pipe(gulp.dest('./dist'));
-
+  // TODO - should signal when done via cb, promise, or stream
   gulp.src('./app/vendor/**/*.*')
     .pipe(gulp.dest('./dist/vendor'));
+
+  return gulp.src('./app/*.{html,txt}')
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('sass', () => {
@@ -79,18 +78,20 @@ gulp.task('images', () => {
 /****************************************************/
 // Sync Tasks
 /****************************************************/
-// reload deps must include all watch deps below, or reload might run before re-compilation is complete
-gulp.task('reload', ['move', 'sass', 'lint', 'images', 'browserify'], browserSync.reload);
-
 gulp.task('watch', () => {
-  gulp.watch(['./app/scripts/**/*.{js,jsx}'], ['lint', 'browserify', 'reload']);
+  gulp.watch(['./app/scripts/**/*.{js,jsx}'], ['reloadJS']);
 
-  gulp.watch(['./app/**/*.html'], ['move', 'reload']);
+  gulp.watch(['./app/styles/**/*.{scss,sass,css}'], ['reloadCSS']);
 
-  gulp.watch(['./app/styles/**/*.{scss,sass,css}'], ['sass', 'reload']);
+  gulp.watch(['./app/**/*.html'], ['reloadMove']);
 
-  gulp.watch(['./app/images/**/*.{png,gif,jpg}'], ['images', 'reload']);
+  gulp.watch(['./app/images/**/*.{png,gif,jpg}'], ['reloadImages']);
 });
+
+gulp.task('reloadJS', ['lint', 'browserify'], browserSync.reload);
+gulp.task('reloadCSS', ['sass'], browserSync.reload);
+gulp.task('reloadMove', ['move'], browserSync.reload);
+gulp.task('reloadImages', ['images'], browserSync.reload);
 
 
 /****************************************************/
