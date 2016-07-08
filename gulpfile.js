@@ -23,12 +23,21 @@ b.on('log', gutil.log);
 function bundler(b) {
   return b
     .bundle()
-    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .on('error', logCompilationError)
     .pipe(source('index.js'))
     .pipe(buffer())
     .pipe(gulp.dest('./dist/scripts'))
 }
 
+function logCompilationError(err) {
+  gutil.log(gutil.colors.bgRed(
+    '\n************COMPILATION ERROR************\n\n',
+    err.message.replace(/: /g, ':\n'),
+    '\n\n*****************************************'
+  ));
+
+  this.emit('end');
+}
 
 /****************************************************/
 // asset compilation tasks
