@@ -42,7 +42,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "react": "^0.12.2"
+    "react": "^0.13.0"
   },
   "bugs": {
     "url": "https://github.com/jameslaneconkling/react-browserify-boiler/issues"
