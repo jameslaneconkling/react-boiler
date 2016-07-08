@@ -14,7 +14,7 @@ const gulp           = require('gulp'),
       imagemin       = require('gulp-imagemin'),
       ghPages        = require('gulp-gh-pages');
 
-const b = browserify('./app/scripts/app.js', {debug: true})
+const b = browserify('./app/scripts/index.jsx', {debug: true})
   .transform('babelify', {
     presets: ['es2015', 'react'],
   });
@@ -24,7 +24,7 @@ function bundler(b) {
   return b
     .bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-    .pipe(source('app.js'))
+    .pipe(source('index.js'))
     .pipe(buffer())
     .pipe(gulp.dest('./dist/scripts'))
 }
@@ -36,7 +36,7 @@ function bundler(b) {
 gulp.task('browserify', () => bundler(b));
 
 gulp.task('lint', () => {
-  return gulp.src('./app/scripts/**/*.js')
+  return gulp.src('./app/scripts/**/*.{js,jsx}')
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter(stylish));
 });
@@ -74,7 +74,7 @@ gulp.task('images', () => {
 gulp.task('reload', ['move', 'sass', 'lint', 'images', 'browserify'], browserSync.reload);
 
 gulp.task('watch', () => {
-  gulp.watch(['./app/scripts/**/*.js'], ['lint', 'browserify', 'reload']);
+  gulp.watch(['./app/scripts/**/*.{js,jsx}'], ['lint', 'browserify', 'reload']);
 
   gulp.watch(['./app/**/*.html'], ['move', 'reload']);
 
