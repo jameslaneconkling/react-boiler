@@ -46,7 +46,7 @@ gulp.task('browserify', () => bundler(b));
 
 gulp.task('lint', () => {
   return gulp.src('./app/scripts/**/*.{js,jsx}')
-    .pipe(jshint('.jshintrc'))
+    .pipe(jshint({ linter: require('jshint-jsx').JSXHINT }))
     .pipe(jshint.reporter(stylish));
 });
 
