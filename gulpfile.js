@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const gulp           = require('gulp');
 const browserSync    = require('browser-sync');
 const browserify     = require('browserify');
@@ -16,7 +16,7 @@ const imagemin       = require('gulp-imagemin');
 const ghPages        = require('gulp-gh-pages');
 
 const b = browserify({
-  entries: ['./app/scripts/index.jsx'],
+  entries: ['./app/index.jsx'],
   debug: true,
   cache: {},
   packageCache: {},
@@ -35,7 +35,7 @@ function bundle(b, reload) {
     .on('error', logCompilationError)
     .pipe(source('index.js'))
     .pipe(buffer())
-    .pipe(gulp.dest('./dist/scripts'))
+    .pipe(gulp.dest('./dist'))
     .on('finish', () => {
       if (reload) {
         gutil.log('\n*****************************************\n\n');
@@ -60,7 +60,7 @@ function logCompilationError(err) {
 gulp.task('compileJS', () => bundle(b));
 
 gulp.task('lint', () => {
-  return gulp.src('./app/scripts/**/*.{js,jsx}')
+  return gulp.src('./app/**/*.{js,jsx}')
     .pipe(jshint({ linter: require('jshint-jsx').JSXHINT }))
     .pipe(jshint.reporter(stylish));
 });
@@ -94,7 +94,7 @@ gulp.task('images', () => {
 // Sync Tasks
 /****************************************************/
 gulp.task('watch', () => {
-  gulp.watch(['./app/scripts/**/*.{js,jsx}'], ['lint']);
+  gulp.watch(['./app/**/*.{js,jsx}'], ['lint']);
 
   gulp.watch(['./app/styles/**/*.{scss,sass,css}'], ['reloadCSS']);
 
