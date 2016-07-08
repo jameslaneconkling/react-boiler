@@ -99,7 +99,8 @@ gulp.task('watch', () => {
 gulp.task('serve', () => {
   browserSync({
     server: { baseDir: './dist' },
-    port: process.env.PORT || 3000
+    port: process.env.PORT || 3000,
+    open: false
   });
 });
 
