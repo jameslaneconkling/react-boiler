@@ -11,8 +11,8 @@ const stylish        = require('jshint-stylish');
 const sass           = require('gulp-sass');
 const cleanCSS       = require('gulp-clean-css');
 const autoprefixer   = require('gulp-autoprefixer');
-const changed        = require('gulp-changed');
-const imagemin       = require('gulp-imagemin');
+// const changed        = require('gulp-changed');
+// const imagemin       = require('gulp-imagemin');
 const ghPages        = require('gulp-gh-pages');
 
 const b = browserify({
@@ -100,12 +100,12 @@ gulp.task('watch', () => {
 
   gulp.watch(['./app/**/*.html'], ['reloadMove']);
 
-  gulp.watch(['./app/images/**/*.{png,gif,jpg}'], ['reloadImages']);
+  // gulp.watch(['./app/images/**/*.{png,gif,jpg}'], ['reloadImages']);
 });
 
 gulp.task('reloadCSS', ['sass'], browserSync.reload);
 gulp.task('reloadMove', ['move'], browserSync.reload);
-gulp.task('reloadImages', ['images'], browserSync.reload);
+// gulp.task('reloadImages', ['images'], browserSync.reload);
 
 
 /****************************************************/
