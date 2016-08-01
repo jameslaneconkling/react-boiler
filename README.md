@@ -5,7 +5,6 @@ A gulp/browserify starter kit for react, with a few bells and whistles, includin
 * linting
 * live reload
 * scss compilation
-* image minification
 * deployment to gh-pages
 
 
