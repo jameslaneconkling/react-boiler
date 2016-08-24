@@ -25,7 +25,7 @@ const b = browserify({
   plugin: [watchify]
 })
   .transform('babelify', {
-    presets: ['es2015', 'react'],
+    presets: ['es2015', 'react'], // NOTE - only need to include es2015 plugins as needed
   });
 
 b.on('update', () => bundle(b, true));
