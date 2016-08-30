@@ -45,7 +45,8 @@
   },
   "dependencies": {
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "react-router": "^2.7.0"
   },
   "bugs": {
     "url": "https://github.com/jameslaneconkling/react-browserify-boiler/issues"
