@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import Item from './item.jsx';
 
 export default React.createClass({
   render() {
@@ -11,16 +12,11 @@ export default React.createClass({
         <h2><em><small>{queryString}</small></em></h2>
 
         <ul>
-          {items.map(item => (
-            <li key={item.id}>
-              <dl>
-                <dt>ID</dt>
-                <dd>{item.id}</dd>
-                <dt>Description</dt>
-                <dd>{item.description}</dd>
-              </dl>
-            </li>
-          ))}
+          {items.map(item => <Item 
+            item={item}
+            key={item.id}
+            deleteItem={this.props.deleteItem} 
+          />)}
         </ul>
       </section>
     );

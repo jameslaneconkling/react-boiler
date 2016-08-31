@@ -22,13 +22,22 @@ export default React.createClass({
     this.setState({queryString});
   },
 
+  deleteItem(deletedItemId) {
+    this.setState({
+      items: this.state.items.filter(item => item.id !== deletedItemId) 
+    });
+  },
+
   render() {
     return (
       <section>
         <h1>REACT BOILER</h1>
         <SearchForm queryString={this.state.queryString} updateQueryString={this.updateQueryString} />
 
-        {this.props.children && React.cloneElement(this.props.children, { items: this.state.items })}
+        {this.props.children && React.cloneElement(this.props.children, { 
+          items: this.state.items, 
+          deleteItem: this.deleteItem
+        })}
       </section>
     );
   }
