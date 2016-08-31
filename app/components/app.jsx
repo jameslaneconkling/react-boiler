@@ -1,44 +1,37 @@
 'use strict';
 import React from 'react';
 import SearchForm from './search-form.jsx';
+import { connector } from '../store/index.jsx'
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      items: [
-        {id: 1, name: 'one', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'},
-        {id: 2, name: 'two', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'},
-        {id: 3, name: 'three', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'},
-        {id: 4, name: 'four', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'},
-        {id: 5, name: 'five', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'},
-        {id: 6, name: 'six', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'},
-        {id: 7, name: 'seven', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'}
-      ],
-      queryString: null
-    };
+const App = React.createClass({
+  propTypes: {
+    queryString: React.PropTypes.string,
+    items: React.PropTypes.array,
+    updateQueryString: React.PropTypes.func,
+    deleteItem: React.PropTypes.func,
   },
 
   updateQueryString(queryString) {
-    this.setState({queryString});
+    this.props.setQueryString(queryString);
   },
 
-  deleteItem(deletedItemId) {
-    this.setState({
-      items: this.state.items.filter(item => item.id !== deletedItemId) 
-    });
+  deleteItem(itemId) {
+    this.props.deleteItem(itemId);
   },
 
   render() {
     return (
       <section>
         <h1>REACT BOILER</h1>
-        <SearchForm queryString={this.state.queryString} updateQueryString={this.updateQueryString} />
+        <SearchForm queryString={this.props.queryString} updateQueryString={this.updateQueryString} />
 
-        {this.props.children && React.cloneElement(this.props.children, { 
-          items: this.state.items, 
+        {this.props.children && React.cloneElement(this.props.children, {
+          items: this.props.items,
           deleteItem: this.deleteItem
         })}
       </section>
     );
   }
 });
+
+export default connector(App);

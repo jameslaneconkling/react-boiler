@@ -3,6 +3,10 @@ import React from 'react';
 import Item from './item.jsx';
 
 export default React.createClass({
+  propTypes: {
+    items: React.PropTypes.array,
+    deleteItem: React.PropTypes.func
+  },
   render() {
     const queryString = this.props.location.query.q;
     const items = this.props.items.filter(item => item);
@@ -12,10 +16,10 @@ export default React.createClass({
         <h2><em><small>{queryString}</small></em></h2>
 
         <ul>
-          {items.map(item => <Item 
+          {items.map(item => <Item
             item={item}
             key={item.id}
-            deleteItem={this.props.deleteItem} 
+            deleteItem={this.props.deleteItem}
           />)}
         </ul>
       </section>

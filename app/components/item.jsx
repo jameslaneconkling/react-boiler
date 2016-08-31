@@ -2,6 +2,10 @@
 import React from 'react';
 
 export default React.createClass({
+  propTypes: {
+    item: React.PropTypes.object,
+    deleteItem: React.PropTypes.func
+  },
   deleteButtonClicked() {
     this.props.deleteItem(this.props.item.id);
   },

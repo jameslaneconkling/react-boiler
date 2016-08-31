@@ -1,20 +1,22 @@
 'use strict';
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, hashHistory } from 'react-router'; 
+import { Router, Route, hashHistory } from 'react-router';
 import App from './components/app.jsx';
 import Results from './components/results.jsx';
+import { store } from './store/index.jsx';
+import { Provider } from 'react-redux';
 
 render((
-  <Router history={hashHistory}>
-    <Route path='/' component={App} >
-      <Route path='/results' component={Results}/>
-    </Route>
-  </Router>
+  <Provider store={store}>
+    <Router history={hashHistory}>
+      <Route path='/' component={App} >
+        <Route path='/results' component={Results}/>
+      </Route>
+    </Router>
+  </Provider>
 ), document.getElementById('app'));
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React;
 }
-
-export default App;
