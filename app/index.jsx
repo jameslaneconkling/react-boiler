@@ -16,7 +16,3 @@ render((
     </Router>
   </Provider>
 ), document.getElementById('app'));
-
-if (process.env.NODE_ENV !== 'production') {
-  window.React = React;
-}

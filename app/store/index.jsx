@@ -1,8 +1,6 @@
 'use strict';
-// import redux from 'redux';
-// import reactRedux from 'react-redux';
-const redux = require('redux');
-const reactRedux = require('react-redux');
+import { createStore } from 'redux';
+import { connect } from 'react-redux';
 
 const SET_QUERY_STRING = 'setQueryString';
 const DELETE_ITEM = 'deleteItem';
@@ -20,7 +18,7 @@ const initialState = {
   queryString: null
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case SET_QUERY_STRING:
       return Object.assign({}, state, {queryString: action.value});
@@ -46,6 +44,6 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export const store = redux.createStore(reducer);
+export const store = createStore(reducer, initialState, window.devToolsExtension && window.devToolsExtension());
 
-export const connector = reactRedux.connect(mapStateToProps, mapDispatchToProps);
+export const connector = connect(mapStateToProps, mapDispatchToProps);
