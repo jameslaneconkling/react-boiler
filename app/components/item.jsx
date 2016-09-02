@@ -6,9 +6,11 @@ export default React.createClass({
     item: React.PropTypes.object,
     deleteItem: React.PropTypes.func
   },
+
   deleteButtonClicked() {
     this.props.deleteItem(this.props.item.id);
   },
+
   render() {
     return (
       <li>

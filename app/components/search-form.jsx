@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 const { string, func } = React.PropTypes;
 
 export default React.createClass({
@@ -8,17 +8,34 @@ export default React.createClass({
     queryString: string,
     updateQueryString: func
   },
-  inputQueryStringEvent(e) {
-    this.props.updateQueryString(e.target.value);
+
+  getInitialState() {
+    return {queryString: this.props.queryString || ''};
   },
+
+  componentWillReceiveProps(newProps) {
+    this.setState({queryString: newProps.queryString});
+  },
+
+  updateQueryStringEvent(e) {
+    this.setState({queryString: e.target.value})
+  },
+
+  submitSearch(e) {
+    e.preventDefault();
+
+    // TODO - doesn't work'
+    // browserHistory.push({ pathname: '/results', query: { q: this.state.queryString } });
+  },
+
   render() {
     return (
-      <div>
-        <input type="text" value={this.props.queryString} placeholder="..." onChange={this.inputQueryStringEvent}/>
+      <form onSubmit={this.submitSearch}>
+        <input type="text" value={this.state.queryString} placeholder="..." onChange={this.updateQueryStringEvent}/>
         <button>
-          <Link to={{ pathname: '/results', query: { q: this.props.queryString } }}>Search</Link>
+          <Link to={{ pathname: '/results', query: { q: this.state.queryString } }}>Search</Link>
         </button>
-      </div>
+      </form>
     );
   }
 });

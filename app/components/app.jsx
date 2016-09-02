@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import SearchForm from './search-form.jsx';
-import { connector } from '../store/index.jsx'
+import { connector } from '../store.js';
 
 const App = React.createClass({
   propTypes: {
@@ -26,6 +26,7 @@ const App = React.createClass({
         <SearchForm queryString={this.props.queryString} updateQueryString={this.updateQueryString} />
 
         {this.props.children && React.cloneElement(this.props.children, {
+          queryString: this.props.queryString,
           items: this.props.items,
           deleteItem: this.deleteItem
         })}
