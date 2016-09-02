@@ -4,8 +4,12 @@ import { render }             from 'react-dom';
 import {
   Router,
   Route,
-  hashHistory
+  browserHistory
 }                             from 'react-router';
+import {
+  syncHistoryWithStore,
+  routerReducer
+}                             from 'react-router-redux'
 import {
   combineReducers,
   createStore
@@ -15,12 +19,15 @@ import reducers               from './reducers';
 import App                    from './components/app.jsx';
 import Results                from './components/results.jsx';
 
-const reducer = combineReducers(reducers);
+// TODO - replace with ...spread
+const reducer = combineReducers(Object.assign({}, reducers, {routing: routerReducer}));
 const store = createStore(reducer, window.devToolsExtension && window.devToolsExtension());
+
+const history = syncHistoryWithStore(browserHistory, store);
 
 render((
   <Provider store={store}>
-    <Router history={hashHistory}>
+    <Router history={history}>
       <Route path='/' component={App}>
         <Route path='/results' component={Results}/>
       </Route>
