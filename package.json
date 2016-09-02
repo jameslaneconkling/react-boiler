@@ -5,6 +5,7 @@
   "scripts": {
     "build": "gulp build",
     "dev": "gulp dev",
+    "prod": "gulp prod",
     "deploy": "gulp deploy"
   },
   "repository": {
@@ -31,7 +32,9 @@
     "gulp-clean-css": "^2.0.6",
     "gulp-gh-pages": "^0.5.4",
     "gulp-jshint": "^2.0.0",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "jshint": "^2.9.1",
     "jshint-jsx": "^0.5.0",

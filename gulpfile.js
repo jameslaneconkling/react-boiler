@@ -11,6 +11,8 @@ const stylish        = require('jshint-stylish');
 const sass           = require('gulp-sass');
 const cleanCSS       = require('gulp-clean-css');
 const autoprefixer   = require('gulp-autoprefixer');
+const uglify         = require('gulp-uglify');
+const rename         = require('gulp-rename');
 // const changed        = require('gulp-changed');
 // const imagemin       = require('gulp-imagemin');
 const ghPages        = require('gulp-gh-pages');
@@ -58,6 +60,13 @@ function logCompilationError(err) {
 // asset compilation tasks
 /****************************************************/
 gulp.task('compileJS', () => bundle(b));
+
+gulp.task('uglifyJS', () => {
+  return gulp.src('./dist/index.js')
+    .pipe(uglify())
+    .pipe(rename('index.min.js'))
+    .pipe(gulp.dest('./dist'));
+});
 
 gulp.task('lint', () => {
   return gulp.src('./app/**/*.{js,jsx}')
@@ -129,4 +138,6 @@ gulp.task('build', ['lint', 'compileJS', 'sass', 'move', 'images']);
 
 gulp.task('dev', ['build', 'watch', 'serve']);
 
-gulp.task('deploy', ['build', 'gh-pages']);
+gulp.task('prod', ['build', 'uglifyJS']);
+
+gulp.task('deploy', ['prod', 'gh-pages']);
