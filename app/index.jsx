@@ -4,7 +4,7 @@ import { render }             from 'react-dom';
 import {
   Router,
   Route,
-  browserHistory
+  hashHistory
 }                             from 'react-router';
 import {
   syncHistoryWithStore,
@@ -23,7 +23,7 @@ import Results                from './components/results.jsx';
 const reducer = combineReducers(Object.assign({}, reducers, {routing: routerReducer}));
 const store = createStore(reducer, window.devToolsExtension && window.devToolsExtension());
 
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 render((
   <Provider store={store}>
