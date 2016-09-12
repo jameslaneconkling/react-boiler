@@ -1,7 +1,10 @@
 'use strict';
 import React from 'react';
-import SearchForm from './search-form.jsx';
 import { connect } from 'react-redux';
+import {
+  Link,
+  hashHistory
+} from 'react-router';
 
 const App = React.createClass({
   propTypes: {
@@ -11,32 +14,60 @@ const App = React.createClass({
     deleteItem: React.PropTypes.func,
   },
 
-  updateQueryString(queryString) {
-    this.props.setQueryString(queryString);
+  getInitialState() {
+    return {
+      queryString: this.props.queryString
+    };
   },
 
-  deleteItem(itemId) {
-    this.props.deleteItem(itemId);
+  updateQueryStringEvent(e) {
+    this.setState({queryString: e.target.value})
+  },
+
+  itemClickEvent(e) {
+    this.props.deleteItem(e.target.getAttribute('data-id'));
+  },
+
+  submitFilter() {
+    hashHistory.push({ pathname: '/', query: { q: this.state.queryString } });
+    // this.props.setQueryString(this.state.queryString);
   },
 
   render() {
-    return (
-      <section>
-        <h1>REACT BOILER</h1>
-        <SearchForm queryString={this.props.queryString} updateQueryString={this.updateQueryString} />
+    const items = this.props.items
+      .filter(item => new RegExp(this.props.queryString.split('').join('.*')).test(item.name))
+      .map(item => (
+        <li key={item.id}>
+          <h3>{item.name}</h3>
+          <button onClick={this.itemClickEvent} data-id={item.id}>x</button>
+          <p>{item.description}</p>
+        </li>
+      ));
 
-        {this.props.children && React.cloneElement(this.props.children, {
-          queryString: this.props.queryString,
-          items: this.props.items,
-          deleteItem: this.deleteItem
-        })}
-      </section>
+    return (
+      <main>
+        <h1>REACT BOILER</h1>
+        <hr/>
+
+        <form onSubmit={this.submitFilter}>
+          <input type="text" value={this.state.queryString} placeholder="..." onChange={this.updateQueryStringEvent}/>
+          <button>
+            {/* could just do <button onClick={this.submitFilter} />, but to demonstrate routing: */}
+            <Link to={{ pathname: '/', query: { q: this.state.queryString } }}>Filter</Link>
+          </button>
+        </form>
+
+        <ul>
+          {items}
+        </ul>
+      </main>
     );
   }
 });
 
 const mapStateToProps = (state, props) => ({
   queryString: props.location.query.q,
+  // queryString: state.queryString,
   items: state.items
 });
 
