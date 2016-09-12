@@ -7,19 +7,13 @@ import {
   hashHistory
 }                             from 'react-router';
 import {
-  syncHistoryWithStore,
-  routerReducer
+  syncHistoryWithStore
 }                             from 'react-router-redux'
-import {
-  combineReducers,
-  createStore
-}                             from 'redux';
+import { createStore }        from 'redux';
 import { Provider }           from 'react-redux';
-import reducers               from './reducers';
+import reducer                from './reducers/index.js';
 import App                    from './components/app.jsx';
 
-// TODO - replace with ...spread
-const reducer = combineReducers(Object.assign({}, reducers, {routing: routerReducer}));
 const store = createStore(reducer, window.devToolsExtension && window.devToolsExtension());
 
 const history = syncHistoryWithStore(hashHistory, store);

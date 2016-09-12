@@ -1,6 +1,9 @@
-import items from './items.js';
-import queryString from './query-string.js';
+import { combineReducers } from 'redux';
+import { routerReducer }   from 'react-router-redux';
+import items               from './items.js';
 
-export default {
-  items, queryString
-};
+export default combineReducers({
+  items,
+  routing: routerReducer
+});
+

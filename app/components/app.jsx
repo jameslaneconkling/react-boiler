@@ -30,7 +30,6 @@ const App = React.createClass({
 
   submitFilter() {
     hashHistory.push({ pathname: '/', query: { q: this.state.queryString } });
-    // this.props.setQueryString(this.state.queryString);
   },
 
   render() {
@@ -66,15 +65,11 @@ const App = React.createClass({
 });
 
 const mapStateToProps = (state, props) => ({
-  queryString: props.location.query.q,
-  // queryString: state.queryString,
+  queryString: props.location.query.q || '',
   items: state.items
 });
 
 const mapDispatchToProps = dispatch => ({
-  setQueryString(queryString) {
-    dispatch({type: 'setQueryString', value: queryString});
-  },
   deleteItem(itemId) {
     dispatch({type: 'deleteItem', value: itemId});
   }
