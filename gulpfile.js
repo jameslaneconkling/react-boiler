@@ -13,8 +13,6 @@ const cleanCSS       = require('gulp-clean-css');
 const autoprefixer   = require('gulp-autoprefixer');
 const uglify         = require('gulp-uglify');
 const rename         = require('gulp-rename');
-// const changed        = require('gulp-changed');
-// const imagemin       = require('gulp-imagemin');
 const ghPages        = require('gulp-gh-pages');
 
 const b = browserify({
@@ -91,13 +89,6 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('./dist/styles'));
 });
 
-gulp.task('images', () => {
-  // return gulp.src('./app/images/**')
-  //   .pipe(changed('./dist/images'))
-  //   .pipe(imagemin())
-  //   .pipe(gulp.dest('./dist/images'))
-});
-
 
 /****************************************************/
 // Sync Tasks
@@ -108,13 +99,10 @@ gulp.task('watch', () => {
   gulp.watch(['./app/styles/**/*.{scss,sass,css}'], ['reloadCSS']);
 
   gulp.watch(['./app/**/*.html'], ['reloadMove']);
-
-  // gulp.watch(['./app/images/**/*.{png,gif,jpg}'], ['reloadImages']);
 });
 
 gulp.task('reloadCSS', ['sass'], browserSync.reload);
 gulp.task('reloadMove', ['move'], browserSync.reload);
-// gulp.task('reloadImages', ['images'], browserSync.reload);
 
 
 /****************************************************/
@@ -134,7 +122,7 @@ gulp.task('gh-pages', () => gulp.src('./dist/**/*').pipe(ghPages()));
 /****************************************************/
 // Exported tasks
 /****************************************************/
-gulp.task('build', ['lint', 'compileJS', 'sass', 'move', 'images']);
+gulp.task('build', ['lint', 'compileJS', 'sass', 'move']);
 
 gulp.task('dev', ['build', 'watch', 'serve']);
 
