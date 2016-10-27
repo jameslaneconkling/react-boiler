@@ -61,13 +61,6 @@ function logCompilationError(err) {
 /****************************************************/
 gulp.task('compileJS', () => bundle(b));
 
-gulp.task('uglifyJS', () => {
-  return gulp.src('./dist/index.js')
-    .pipe(uglify())
-    .pipe(rename('index.min.js'))
-    .pipe(gulp.dest('./dist'));
-});
-
 gulp.task('lint', () => {
   return gulp.src('./app/**/*.{js,jsx}')
     .pipe(jshint({ linter: require('jshint-jsx').JSXHINT }))
@@ -80,11 +73,11 @@ gulp.task('move', () => {
 });
 
 gulp.task('sass', () => {
-  return gulp.src('./app/styles/**/*.{scss,sass,css}')
+  return gulp.src('./app/style.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({ browsers: ['last 2 version'] }))
     .pipe(cleanCSS())
-    .pipe(gulp.dest('./dist/styles'));
+    .pipe(gulp.dest('./dist'));
 });
 
 
@@ -109,15 +102,22 @@ gulp.task('reloadMove', ['move'], browserSync.reload);
 gulp.task('build', ['lint', 'compileJS', 'sass', 'move']);
 
 gulp.task('dev', ['build', 'watch'], () => {
-  browserSync({
+  // serve
+  return browserSync({
     server: { baseDir: './dist' },
     port: process.env.PORT || 3000,
     open: false
   });
 });
 
-gulp.task('prod', ['build', 'uglifyJS']);
+gulp.task('prod', ['build'], () => {
+  // minify
+  return gulp.src('./dist/index.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist'));
+});
 
 gulp.task('deploy', ['prod'], () => {
-  gulp.src('./dist/**/*').pipe(ghPages());
+  // deploy to github-pages
+  return gulp.src('./dist/**/*').pipe(ghPages());
 });
