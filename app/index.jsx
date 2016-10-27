@@ -8,7 +8,7 @@ import {
 }                             from 'react-router';
 import {
   syncHistoryWithStore
-}                             from 'react-router-redux'
+}                             from 'react-router-redux';
 import { createStore }        from 'redux';
 import { Provider }           from 'react-redux';
 import reducer                from './reducers/index.js';

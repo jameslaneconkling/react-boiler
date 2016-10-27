@@ -21,7 +21,7 @@ const App = React.createClass({
   },
 
   updateQueryStringEvent(e) {
-    this.setState({queryString: e.target.value})
+    this.setState({queryString: e.target.value});
   },
 
   itemClickEvent(e) {
