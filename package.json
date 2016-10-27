@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "a small react browserify boilerplate app",
   "scripts": {
-    "build": "gulp build",
     "dev": "gulp dev",
-    "prod": "gulp prod",
-    "deploy": "gulp deploy"
+    "prod": "NODE_ENV=production gulp prod",
+    "deploy": "NODE_ENV=production gulp deploy"
   },
   "repository": {
     "type": "git",
