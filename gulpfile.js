@@ -75,10 +75,6 @@ gulp.task('lint', () => {
 });
 
 gulp.task('move', () => {
-  // TODO - should signal when done via cb, promise, or stream
-  gulp.src('./app/vendor/**/*.*')
-    .pipe(gulp.dest('./dist/vendor'));
-
   return gulp.src('./app/*.{html,txt}')
     .pipe(gulp.dest('./dist'));
 });
