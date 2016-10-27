@@ -26,10 +26,10 @@ const b = browserify({
     presets: ['es2015', 'react'], // NOTE - only need to include es2015 plugins as needed
   });
 
-b.on('update', () => bundle(b, true));
+b.on('update', () => bundle(b));
 b.on('log', gutil.log);
 
-function bundle(b, reload) {
+function bundle(b) {
   return b
     .bundle()
     .on('error', logCompilationError)
@@ -37,8 +37,10 @@ function bundle(b, reload) {
     .pipe(buffer())
     .pipe(gulp.dest('./dist'))
     .on('finish', () => {
-      if (reload) {
-        gutil.log('\n*****************************************\n\n');
+      if (process.env.NODE_ENV === 'production') {
+        b.close();
+      } else {
+        gutil.log('\n************FINISHED BUNDLING************');
         browserSync.reload();
       }
     });
@@ -102,9 +104,11 @@ gulp.task('reloadMove', ['move'], browserSync.reload);
 
 
 /****************************************************/
-// Production tasks
+// Exported tasks
 /****************************************************/
-gulp.task('serve', () => {
+gulp.task('build', ['lint', 'compileJS', 'sass', 'move']);
+
+gulp.task('dev', ['build', 'watch'], () => {
   browserSync({
     server: { baseDir: './dist' },
     port: process.env.PORT || 3000,
@@ -112,16 +116,8 @@ gulp.task('serve', () => {
   });
 });
 
-gulp.task('gh-pages', () => gulp.src('./dist/**/*').pipe(ghPages()));
-
-
-/****************************************************/
-// Exported tasks
-/****************************************************/
-gulp.task('build', ['lint', 'compileJS', 'sass', 'move']);
-
-gulp.task('dev', ['build', 'watch', 'serve']);
-
 gulp.task('prod', ['build', 'uglifyJS']);
 
-gulp.task('deploy', ['prod', 'gh-pages']);
+gulp.task('deploy', ['prod'], () => {
+  gulp.src('./dist/**/*').pipe(ghPages());
+});

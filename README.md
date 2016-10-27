@@ -10,7 +10,6 @@ A gulp/browserify starter kit for react, with a few bells and whistles, includin
 
 ### Installation
 ```bash
-npm install -g gulp
 npm install
 ```
 
