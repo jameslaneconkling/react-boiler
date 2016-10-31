@@ -21,6 +21,7 @@ const b = browserify({
   plugin: [watchify]
 })
   .transform('babelify', {
+    plugins: ["transform-object-rest-spread"],
     presets: ['es2015', 'react'], // NOTE - only need to include es2015 plugins as needed
   });
 
