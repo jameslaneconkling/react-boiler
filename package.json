@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "a small react browserify boilerplate app",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "gulp lint",
     "dev": "gulp dev",
     "prod": "NODE_ENV=production gulp prod",
     "deploy": "NODE_ENV=production gulp deploy"
