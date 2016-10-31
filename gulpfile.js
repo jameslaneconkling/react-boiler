@@ -5,14 +5,12 @@ const browserify     = require('browserify');
 const watchify       = require('watchify');
 const source         = require('vinyl-source-stream');
 const buffer         = require('vinyl-buffer');
+const eslint         = require('gulp-eslint');
 const gutil          = require('gulp-util');
-const jshint         = require('gulp-jshint');
-const stylish        = require('jshint-stylish');
 const sass           = require('gulp-sass');
 const cleanCSS       = require('gulp-clean-css');
 const autoprefixer   = require('gulp-autoprefixer');
 const uglify         = require('gulp-uglify');
-const rename         = require('gulp-rename');
 const ghPages        = require('gulp-gh-pages');
 
 const b = browserify({
@@ -63,8 +61,8 @@ gulp.task('compileJS', () => bundle(b));
 
 gulp.task('lint', () => {
   return gulp.src('./app/**/*.{js,jsx}')
-    .pipe(jshint({ linter: require('jshint-jsx').JSXHINT }))
-    .pipe(jshint.reporter(stylish));
+    .pipe(eslint())
+    .pipe(eslint.format())
 });
 
 gulp.task('move', () => {
