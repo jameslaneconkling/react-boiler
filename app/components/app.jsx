@@ -1,5 +1,7 @@
-import { Component } from 'react';
-import World from './world.jsx';
+import React, {
+  Component
+}                 from 'react';
+import World      from './world.jsx';
 
 export default class App extends Component {
   render() {

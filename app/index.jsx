@@ -1,6 +1,11 @@
+import React      from 'react';
 import { render } from 'react-dom';
-import { Router, Route, hashHistory } from 'react-router';
-import App from './components/app.jsx';
+import {
+  Router,
+  Route,
+  hashHistory
+}                 from 'react-router';
+import App        from './components/app.jsx';
 
 render((
   <Router history={hashHistory}>
