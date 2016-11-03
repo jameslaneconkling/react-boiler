@@ -1,8 +1,13 @@
+const webpack           = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './app/index.jsx',
+  entry: [
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './app/index.jsx'
+  ],
   output: {
     path: './dist',
     filename: 'index.js'
@@ -12,10 +17,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
+        loaders: ['react-hot', 'babel']
       },
       {
         test: /\.css$/,
@@ -31,6 +33,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'app/index.html'
     }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.css'),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
