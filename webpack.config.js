@@ -2,16 +2,21 @@ const webpack           = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const HOST = 'localhost';
+const PORT = 8080;
+
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
+    `webpack-dev-server/client?http://${HOST}:${PORT}`,
     'webpack/hot/only-dev-server',
     './app/index.jsx'
   ],
+
   output: {
     path: './dist',
     filename: 'index.js'
   },
+
   module: {
     loaders: [
       {
@@ -29,11 +34,23 @@ module.exports = {
       }
     ]
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: 'app/index.html'
     }),
     new ExtractTextPlugin('style.css'),
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+
+  devtool: 'eval-source-map',
+
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    stats: 'errors-only',
+    host: HOST,
+    port: PORT
+  }
 };
