@@ -4,11 +4,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const HOST = 'localhost';
 const PORT = 8080;
+const PROD = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: [
-    `webpack-dev-server/client?http://${HOST}:${PORT}`,
-    'webpack/hot/only-dev-server',
+    ...(!PROD ? [`webpack-dev-server/client?http://${HOST}:${PORT}`] : []),
+    ...(!PROD ? ['webpack/hot/only-dev-server'] : []),
     './app/index.jsx'
   ],
 
@@ -22,7 +23,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel']
+        loaders: [
+          ...(!PROD ? ['react-hot'] : []),
+          'babel'
+        ]
       },
       {
         test: /\.css$/,
@@ -40,7 +44,7 @@ module.exports = {
       template: 'app/index.html'
     }),
     new ExtractTextPlugin('style.css'),
-    new webpack.HotModuleReplacementPlugin()
+    ...(!PROD ? [new webpack.HotModuleReplacementPlugin()] : [])
   ],
 
   devtool: 'eval-source-map',
