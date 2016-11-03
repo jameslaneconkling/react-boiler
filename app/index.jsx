@@ -6,6 +6,7 @@ import {
   hashHistory
 }                 from 'react-router';
 import App        from './components/app.jsx';
+import                 './style.scss';
 
 render((
   <Router history={hashHistory}>
