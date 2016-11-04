@@ -12,7 +12,8 @@ const PROD = process.env.NODE_ENV === 'production';
 // - server proxy
 // - asset hash names
 // - chunking?
-// - transpile object spread operator
+// npm install babel-runtime --save
+// npm install babel-plugin-transform-runtime --save-dev
 
 module.exports = validate({
   entry: [
