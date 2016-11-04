@@ -6,6 +6,14 @@ const HOST = 'localhost';
 const PORT = 8080;
 const PROD = process.env.NODE_ENV === 'production';
 
+// TODO
+// - minification
+// - server proxy
+// - figure out why the build is so large
+// - webpack validate?
+// - asset hash names
+// - chunking?
+
 module.exports = {
   entry: [
     ...(!PROD ? [`webpack-dev-server/client?http://${HOST}:${PORT}`] : []),
@@ -44,10 +52,16 @@ module.exports = {
       template: 'app/index.html'
     }),
     new ExtractTextPlugin('style.css'),
-    ...(!PROD ? [new webpack.HotModuleReplacementPlugin()] : [])
+    ...(!PROD ? [new webpack.HotModuleReplacementPlugin()] : []),
+    ...(PROD ? [new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      mangle: false
+    })] : [])
   ],
 
-  devtool: 'eval-source-map',
+  devtool: PROD ? 'source-map' : 'eval-source-map',
 
   devServer: {
     historyApiFallback: true,
