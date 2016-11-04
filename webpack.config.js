@@ -1,4 +1,6 @@
 const webpack           = require('webpack');
+const path              = require('path');
+const validate          = require('webpack-validator');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -7,14 +9,12 @@ const PORT = 8080;
 const PROD = process.env.NODE_ENV === 'production';
 
 // TODO
-// - minification
 // - server proxy
-// - figure out why the build is so large
-// - webpack validate?
 // - asset hash names
 // - chunking?
+// - transpile object spread operator
 
-module.exports = {
+module.exports = validate({
   entry: [
     ...(!PROD ? [`webpack-dev-server/client?http://${HOST}:${PORT}`] : []),
     ...(!PROD ? ['webpack/hot/only-dev-server'] : []),
@@ -22,7 +22,7 @@ module.exports = {
   ],
 
   output: {
-    path: './dist',
+    path: path.join(__dirname, 'dist'),
     filename: 'index.js'
   },
 
@@ -30,7 +30,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        include: path.join(__dirname, 'app'),
         loaders: [
           ...(!PROD ? ['react-hot'] : []),
           'babel'
@@ -38,11 +38,13 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader') : 'style-loader!css-loader'
+        loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader') : 'style-loader!css-loader',
+        include: path.join(__dirname, 'app')
       },
       {
         test: /\.scss$/,
-        loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?sourceMap') : 'style-loader!css-loader!sass-loader?sourceMap'
+        loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?sourceMap') : 'style-loader!css-loader!sass-loader?sourceMap',
+        include: path.join(__dirname, 'app')
       }
     ]
   },
@@ -71,4 +73,4 @@ module.exports = {
     host: HOST,
     port: PORT
   }
-};
+});
