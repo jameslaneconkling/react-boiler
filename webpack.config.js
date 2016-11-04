@@ -38,11 +38,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader') : 'style-loader!css-loader'
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?sourceMap')
+        loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?sourceMap') : 'style-loader!css-loader!sass-loader?sourceMap'
       }
     ]
   },
@@ -51,8 +51,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'app/index.html'
     }),
-    new ExtractTextPlugin('style.css'),
     ...(!PROD ? [new webpack.HotModuleReplacementPlugin()] : []),
+    ...(PROD ? [new ExtractTextPlugin('style.css')] : []),
     ...(PROD ? [new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
