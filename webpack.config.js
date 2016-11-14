@@ -73,5 +73,9 @@ module.exports = validate({
     stats: 'errors-only',
     host: HOST,
     port: PORT
+  },
+  
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.json']
   }
 });
