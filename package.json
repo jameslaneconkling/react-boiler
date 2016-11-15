@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint ./app/",
     "dev": "webpack-dev-server --devtool eval --progress",
-    "prod": "NODE_ENV=production webpack -p --progress"
+    "prod": "NODE_ENV=production webpack --progress"
   },
   "repository": {
     "type": "git",
