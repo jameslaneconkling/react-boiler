@@ -12,14 +12,16 @@ const items = {
 
 export default (state = items, action) => {
   switch (action.type) {
-    case 'add':
+    case 'add': {
       const newItemId = Math.max(Object.keys(state));
       return {
         ...state,
         [newItemId]: { name: `new item ${newItemId}`, description: 'new lorem' }
       };
-    case 'remove':
+    }
+    case 'remove': {
       return R.omit([action.value], state);
+    }
     default:
       return state;
   }
