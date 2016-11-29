@@ -16,7 +16,7 @@ export default (state = items, action) => {
       const newItemId = Math.max(Object.keys(state));
       return {
         ...state,
-        { [newItemId]: { name: `new item ${newItemId}`, description: 'new lorem' } }
+        [newItemId]: { name: `new item ${newItemId}`, description: 'new lorem' }
       };
     case 'remove':
       return R.omit([action.value], state);
