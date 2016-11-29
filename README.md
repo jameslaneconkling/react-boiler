@@ -1,13 +1,11 @@
-## React Boilerplate
+## React-Redux Boilerplate
 
-A starter kit for react, with a few bells and whistles, including
+A starter kit for react and redux, with a few bells and whistles, including
 * es6 transpilation
 * linting
 * hot reloading
 * scss compilation
 * deployment to gh-pages
-
-The `redux` branch implemenents a more fully featured react/redux boilerplate.  The `webpack` branch implements, surprisingly, a webpack build.
 
 
 ### Installation
