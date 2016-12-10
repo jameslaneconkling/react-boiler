@@ -10,8 +10,8 @@ import {
 }                             from 'react-router-redux';
 import { createStore }        from 'redux';
 import { Provider }           from 'react-redux';
-import reducer                from './reducers/index.js';
-import App                    from './components/app.jsx';
+import reducer                from './reducers/index';
+import App                    from './components/app';
 
 const store = createStore(reducer, window.devToolsExtension && window.devToolsExtension());
 
@@ -20,7 +20,7 @@ const history = syncHistoryWithStore(hashHistory, store);
 render((
   <Provider store={store}>
     <Router history={history}>
-      <Route path='/' component={App} />
+      <Route path="/" component={App} />
     </Router>
   </Provider>
 ), document.getElementById('app'));

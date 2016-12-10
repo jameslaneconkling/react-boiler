@@ -1,51 +1,12 @@
-import React, {
-  Component
-}                  from 'react';
-import { connect } from 'react-redux';
-import World       from './world.jsx';
-
-const selectItems = state => {
-  return Object.keys(state.items).map(itemId => ({
-    [itemId]: { name: state.items[itemId].name, description: state.items[itemId].description }
-  }));
-};
+import React       from 'react';
+import ItemList    from '../containers/itemList';
 
 
-class App extends Component {
-  render() {
-    const { items } = this.props;
+export default () => (
+  <div>
+    <h1>REACT REDUX BOILER</h1>
 
-    return (
-      <main>
-        <h1>REACT BOILER</h1>
+    <ItemList />
 
-        <World />
-
-        <ul>
-          {items.map(item => (
-            <li
-              key={item.key}
-            >
-              {item.name}: {item.description}
-            </li>
-          ))}
-        </ul>
-      </main>
-    );
-  }
-}
-
-const mapStateToProps = (state, props) => ({
-  items: selectItems(state)
-});
-
-const mapDispatchToProps = dispatch => ({
-  add() {
-    dispatch({ type: 'add' });
-  },
-  remove(value) {
-    dispatch({ type: 'remove', value });
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+  </div>
+);
