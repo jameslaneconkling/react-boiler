@@ -15,12 +15,58 @@ const PROD = process.env.NODE_ENV === 'production';
 // npm install babel-runtime --save
 // npm install babel-plugin-transform-runtime --save-dev
 
-module.exports = validate({
-  entry: [
-    ...(!PROD ? [`webpack-dev-server/client?http://${HOST}:${PORT}`] : []),
-    ...(!PROD ? ['webpack/hot/only-dev-server'] : []),
+const entry = PROD ?
+  './app/index.jsx' : [
+    `webpack-dev-server/client?http://${HOST}:${PORT}`,
+    'webpack/hot/only-dev-server',
     './app/index.jsx'
-  ],
+  ];
+
+const loaders = PROD ?
+  [
+    {
+      test: /\.jsx?$/,
+      include: path.join(__dirname, 'app'),
+      loaders: ['babel']
+    },
+    {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?sourceMap'),
+      include: path.join(__dirname, 'app')
+    }
+  ] : [
+    {
+      test: /\.jsx?$/,
+      include: path.join(__dirname, 'app'),
+      loaders: [
+        'react-hot',
+        'babel'
+      ]
+    },
+    {
+      test: /\.scss$/,
+      loader: 'style-loader!css-loader!sass-loader?sourceMap',
+      include: path.join(__dirname, 'app')
+    }
+  ];
+
+const plugins = PROD ?
+  [
+    new HtmlWebpackPlugin({ template: 'app/index.html' }),
+    new ExtractTextPlugin('style.css'),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      mangle: false
+    })
+  ] : [
+    new HtmlWebpackPlugin({ template: 'app/index.html' }),
+    new webpack.HotModuleReplacementPlugin()
+  ]
+
+module.exports = validate({
+  entry,
 
   output: {
     path: path.join(__dirname, 'dist'),
@@ -28,41 +74,10 @@ module.exports = validate({
   },
 
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        include: path.join(__dirname, 'app'),
-        loaders: [
-          ...(!PROD ? ['react-hot'] : []),
-          'babel'
-        ]
-      },
-      {
-        test: /\.css$/,
-        loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader') : 'style-loader!css-loader',
-        include: path.join(__dirname, 'app')
-      },
-      {
-        test: /\.scss$/,
-        loader: PROD ? ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?sourceMap') : 'style-loader!css-loader!sass-loader?sourceMap',
-        include: path.join(__dirname, 'app')
-      }
-    ]
+    loaders
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'app/index.html'
-    }),
-    ...(!PROD ? [new webpack.HotModuleReplacementPlugin()] : []),
-    ...(PROD ? [new ExtractTextPlugin('style.css')] : []),
-    ...(PROD ? [new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      mangle: false
-    })] : [])
-  ],
+  plugins,
 
   devtool: PROD ? 'source-map' : 'eval-source-map',
 
@@ -72,9 +87,16 @@ module.exports = validate({
     inline: true,
     stats: 'errors-only',
     host: HOST,
-    port: PORT
+    port: PORT,
+    // proxy: {
+    //   '/api/*' : {
+    //     target: 'http://localhost:3000',
+    //     secure: false,
+    //     changeOrigin: true
+    //   }
+    // }
   },
-  
+
   resolve: {
     extensions: ['', '.js', '.jsx', '.json']
   }
