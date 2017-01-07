@@ -5,7 +5,6 @@ A starter kit for react and redux, with a few bells and whistles, including
 * linting
 * hot reloading
 * scss compilation
-* deployment to gh-pages
 
 
 ### Installation
@@ -19,8 +18,8 @@ npm install
 npm run dev
 ```
 
-### Deployment
+### Build
 
 ```bash
-npm run deploy
+npm run validate
 ```
