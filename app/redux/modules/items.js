@@ -1,5 +1,22 @@
 import R from 'ramda';
 
+/**
+ * constants
+ */
+export const ADD_ITEM = 'ADD_ITEM';
+export const DELETE_ITEM = 'DELETE_ITEM';
+
+
+/**
+ * action creators
+ */
+export const addItem = () => ({ type: ADD_ITEM });
+export const deleteItem = id => ({ type: DELETE_ITEM, value: id });
+
+
+/**
+ * reducer
+ */
 const items = {
   1: { name: 'one', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
   2: { name: 'two', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
@@ -12,17 +29,25 @@ const items = {
 
 export default (state = items, action) => {
   switch (action.type) {
-    case 'add': {
+    case ADD_ITEM: {
       const newItemId = Math.max(Object.keys(state));
       return {
         ...state,
         [newItemId]: { name: `new item ${newItemId}`, description: 'new lorem' }
       };
     }
-    case 'remove': {
+    case DELETE_ITEM: {
       return R.omit([action.value], state);
     }
     default:
       return state;
   }
 };
+
+
+/**
+ * epics
+ */
+export const noopEpic = action$ =>
+  action$.ofType(DELETE_ITEM)
+    .map(() => ({ type: 'NO_OP_RESPONSE' }));

@@ -9,13 +9,10 @@ import {
 import {
   syncHistoryWithStore
 }                             from 'react-router-redux';
-import { createStore }        from 'redux';
 import { Provider }           from 'react-redux';
-import reducer                from './reducers/index';
+import store                  from './redux/store';
 import App                    from './components/app';
 import                             './style.scss';
-
-const store = createStore(reducer, window.devToolsExtension && window.devToolsExtension());
 
 const history = syncHistoryWithStore(hashHistory, store);
 

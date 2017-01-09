@@ -3,12 +3,12 @@ import {
 }                from 'react-redux';
 import Item      from '../components/item';
 import {
-  deleteClickAction
-}                from '../actions/items';
+  deleteItem
+}                from '../redux/modules/items';
 
 const mapDispatchToProps = dispatch => ({
   deleteClick(id) {
-    dispatch(deleteClickAction(id));
+    dispatch(deleteItem(id));
   }
 });
 

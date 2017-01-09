@@ -88,13 +88,13 @@ module.exports = validate({
     stats: 'errors-only',
     host: HOST,
     port: PORT,
-    // proxy: {
-    //   '/api/*' : {
-    //     target: 'http://localhost:3000',
-    //     secure: false,
-    //     changeOrigin: true
-    //   }
-    // }
+    proxy: {
+      '/api/*': {
+        target: 'http://localhost:3000',
+        secure: false,
+        changeOrigin: true
+      }
+    }
   },
 
   resolve: {
