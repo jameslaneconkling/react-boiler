@@ -70,6 +70,7 @@ module.exports = validate({
 
   output: {
     path: path.join(__dirname, 'dist'),
+    publicPath: '/',
     filename: 'index.js'
   },
 
