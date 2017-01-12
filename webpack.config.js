@@ -54,6 +54,7 @@ const plugins = PROD ?
   [
     new HtmlWebpackPlugin({ template: 'app/index.html' }),
     new ExtractTextPlugin('style.css'),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -62,6 +63,7 @@ const plugins = PROD ?
     })
   ] : [
     new HtmlWebpackPlugin({ template: 'app/index.html' }),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('development') }),
     new webpack.HotModuleReplacementPlugin()
   ]
 
