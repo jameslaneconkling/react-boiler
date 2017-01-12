@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const HOST = 'localhost';
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const PROD = process.env.NODE_ENV === 'production';
 
 // TODO
