@@ -7,6 +7,10 @@
     ],
     "rules": {
         "comma-dangle": ["error", "never"],
-        "no-multi-spaces": 0
+        "no-multi-spaces": 0,
+        "no-confusing-arrow": ["error", { "allowParens": true }],
+        "max-len": [2, { "code": 100, "ignoreComments": true, "ignoreTrailingComments": true, "ignoreTemplateLiterals": true }],
+        "import/prefer-default-export": 0,
+        "no-console": 0
     }
 }
