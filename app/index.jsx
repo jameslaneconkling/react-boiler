@@ -4,7 +4,7 @@ import { render }             from 'react-dom';
 import {
   Router,
   Route,
-  hashHistory
+  browserHistory
 }                             from 'react-router';
 import {
   syncHistoryWithStore
@@ -14,7 +14,7 @@ import store                  from './redux/store';
 import App                    from './containers/App';
 import                             './style.scss';
 
-const history = syncHistoryWithStore(hashHistory, store);
+const history = syncHistoryWithStore(browserHistory, store);
 
 render((
   <Provider store={store}>
