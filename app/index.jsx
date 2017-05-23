@@ -11,7 +11,7 @@ import {
 }                             from 'react-router-redux';
 import { Provider }           from 'react-redux';
 import store                  from './redux/store';
-import App                    from './components/app';
+import App                    from './containers/App';
 import                             './style.scss';
 
 const history = syncHistoryWithStore(hashHistory, store);
