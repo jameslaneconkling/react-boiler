@@ -1,4 +1,5 @@
-import R from 'ramda';
+import R                 from 'ramda';
+import                        'rxjs/add/operator/map';
 
 /**
  * constants
@@ -20,11 +21,7 @@ export const deleteItem = id => ({ type: DELETE_ITEM, value: id });
 const items = {
   1: { name: 'one', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
   2: { name: 'two', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-  3: { name: 'three', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-  4: { name: 'four', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-  5: { name: 'five', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-  6: { name: 'six', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-  7: { name: 'seven', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' }
+  3: { name: 'three', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' }
 };
 
 export default (state = items, action) => {
@@ -50,4 +47,4 @@ export default (state = items, action) => {
  */
 export const noopEpic = action$ =>
   action$.ofType(DELETE_ITEM)
-    .map(() => ({ type: 'NO_OP_RESPONSE' }));
+    .map(() => ({ type: 'NO_OP' }));
