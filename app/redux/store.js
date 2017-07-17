@@ -1,4 +1,5 @@
-/* eslint-disable no-undef, no-underscore-dangle */
+/* global window */
+/* eslint-disable no-underscore-dangle */
 import {
   createStore,
   applyMiddleware,
