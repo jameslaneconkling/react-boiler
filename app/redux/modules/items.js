@@ -1,4 +1,4 @@
-import R                 from 'ramda';
+import { Observable }    from 'rxjs/Observable';
 import                        'rxjs/add/operator/switchMap';
 import                        'rxjs/add/observable/empty';
 
@@ -17,9 +17,7 @@ export const noOp = () => ({ type: NO_OP });
 /**
  * reducer
  */
-export default (state = {}, action) => {
-  return state;
-};
+export default (state = {}) => state;
 
 
 /**
