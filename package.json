@@ -2,13 +2,6 @@
   "name": "react-boilerplate",
   "version": "1.2.0",
   "description": "a small react-redux boilerplate app",
-  "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.dev.js --devtool eval --progress",
-    "lint": "eslint ./app/",
-    "test": "babel test/ -d test-dist/ && node test-dist/ | tap-summary",
-    "build": "NODE_ENV=production webpack --config webpack.config.prod.js --progress",
-    "validate": "npm run lint && npm run test && npm run build"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jameslaneconkling/react-boiler.git"
@@ -20,6 +13,13 @@
     "react",
     "redux"
   ],
+  "scripts": {
+    "dev": "webpack-dev-server --config webpack.config.dev.js --devtool eval --progress",
+    "lint": "eslint ./app/",
+    "test": "babel test/ -d test-dist/ && node test-dist/ | tap-summary",
+    "build": "NODE_ENV=production webpack --config webpack.config.prod.js --progress",
+    "validate": "npm run lint && npm run test && npm run build"
+  },
   "author": "jameslaneconkling",
   "license": "ISC",
   "devDependencies": {
@@ -61,9 +61,26 @@
     "redux-observable": "^0.14.1",
     "rxjs": "^5.4.0"
   },
-  "bugs": {
-    "url": "https://github.com/jameslaneconkling/react-boiler/issues"
+  "babel": {
+    "plugins": ["transform-object-rest-spread", "babel-plugin-transform-class-properties"],
+    "presets": ["es2015", "react"]
   },
-  "homepage": "https://github.com/jameslaneconkling/react-boiler#readme",
+  "eslintConfig": {
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "plugins": [
+      "react",
+      "jsx-a11y",
+      "import"
+    ],
+    "rules": {
+      "comma-dangle": ["error", "never"],
+      "no-multi-spaces": 0,
+      "no-confusing-arrow": ["error", { "allowParens": true }],
+      "max-len": [2, { "code": 100, "ignoreComments": true, "ignoreTrailingComments": true, "ignoreTemplateLiterals": true }],
+      "import/prefer-default-export": 0,
+      "no-console": 0
+    }
+  },
   "main": "dist/index.html"
 }
