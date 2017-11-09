@@ -15,13 +15,13 @@ module.exports = {
   entry: [
     `webpack-dev-server/client?http://${HOST}:${PORT}`,
     'webpack/hot/only-dev-server',
-    './app/index.jsx'
+    './app/index.jsx',
   ],
 
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'index.js'
+    filename: 'index.js',
   },
 
   module: {
@@ -31,19 +31,19 @@ module.exports = {
         include: path.join(__dirname, 'app'),
         use: [
           'react-hot-loader',
-          'babel-loader'
-        ]
+          'babel-loader',
+        ],
       },
       {
         test: /\.scss$/,
         include: path.join(__dirname, 'app'),
-        loader: 'style-loader!css-loader!sass-loader?sourceMap'
+        loader: 'style-loader!css-loader!sass-loader?sourceMap',
       },
       {
         test: /\.(woff2?|svg)$/,
-        loader: 'url-loader?limit=10000'
-      }
-    ]
+        loader: 'url-loader?limit=10000',
+      },
+    ],
   },
 
   plugins: [
@@ -53,9 +53,9 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('development'),
       'process.env.__GIT_DESCRIPTION__': JSON.stringify(
         childProcess.execSync('git describe --always').toString()
-      )
+      ),
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
 
   devtool: 'eval-source-map',
@@ -71,15 +71,15 @@ module.exports = {
       '/api/*': {
         target: DEV_PROXY,
         secure: false,
-        changeOrigin: true
-      }
-    }
+        changeOrigin: true,
+      },
+    },
   },
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss'],
     alias: {
-      '@graphistry/falcor': path.resolve('./node_modules/@graphistry/falcor/dist/falcor.all.js')
-    }
-  }
+      '@graphistry/falcor': path.resolve('./node_modules/@graphistry/falcor/dist/falcor.all.js'),
+    },
+  },
 };

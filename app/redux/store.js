@@ -3,14 +3,14 @@
 import {
   createStore,
   applyMiddleware,
-  compose
+  compose,
 }                             from 'redux';
 import createHistory          from 'history/createBrowserHistory';
 import {
-  routerMiddleware
+  routerMiddleware,
 }                             from 'react-router-redux';
 import {
-  createEpicMiddleware
+  createEpicMiddleware,
 }                             from 'redux-observable';
 import reducer                from './reducer';
 import epic                   from './epic';

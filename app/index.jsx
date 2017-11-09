@@ -2,14 +2,14 @@
 import React                  from 'react';
 import { render }             from 'react-dom';
 import {
-  ConnectedRouter
+  ConnectedRouter,
 }                             from 'react-router-redux';
 import {
-  Route
+  Route,
 }                             from 'react-router';
 import { Provider }           from 'react-redux';
 import store, {
-  history
+  history,
 }                             from './redux/store';
 import App                    from './containers/App';
 import                             './style.scss';

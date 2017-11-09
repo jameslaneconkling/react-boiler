@@ -1,8 +1,8 @@
 import {
-  connect
+  connect,
 }                          from 'react-redux';
 import {
-  compose
+  compose,
 }                          from 'recompose';
 import App                 from '../../components/App';
 

@@ -4,5 +4,5 @@ import items               from './modules/items';
 
 export default combineReducers({
   items,
-  routing: routerReducer
+  routing: routerReducer,
 });
