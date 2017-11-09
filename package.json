@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js --devtool eval --progress",
     "lint": "eslint ./app/",
-    "test": "babel test/ -d test-dist/ && node test-dist/ | tap-summary",
+    "test": "node test/",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js --progress",
     "validate": "npm run lint && npm run test && npm run build"
   },
