@@ -20,7 +20,7 @@
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js --progress",
     "validate": "npm run lint && npm run test && npm run build"
   },
-  "author": "jameslaneconkling",
+  "author": "James Conkling <james.lane.conkling@gmail.com> jameslaneconkling.github.io",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
