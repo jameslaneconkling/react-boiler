@@ -7,7 +7,12 @@ const ExtractTextPlugin   = require('extract-text-webpack-plugin');
 const childProcess        = require('child_process');
 
 module.exports = {
-  entry: './app/index.jsx',
+  entry: {
+    app: [
+      'babel-polyfill',
+      './app/index.jsx',
+    ],
+  },
 
   output: {
     path: path.join(__dirname, 'dist'),

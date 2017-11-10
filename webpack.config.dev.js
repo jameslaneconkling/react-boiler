@@ -17,7 +17,12 @@ module.exports = {
   //   'webpack/hot/only-dev-server',
   //   './app/index.jsx',
   // ],
-  entry: './app/index.jsx',
+  entry: {
+    app: [
+      'babel-polyfill',
+      './app/index.jsx',
+    ],
+  },
 
   output: {
     path: path.join(__dirname, 'dist'),
