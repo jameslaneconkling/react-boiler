@@ -1,6 +1,8 @@
 /* global document */
+/* eslint-disable global-require */
 import React                  from 'react';
 import { render }             from 'react-dom';
+import { AppContainer }       from 'react-hot-loader';
 import {
   ConnectedRouter,
 }                             from 'react-router-redux';
@@ -15,10 +17,22 @@ import App                    from './containers/App';
 import                             './style.scss';
 
 
-render((
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Route path="/" component={App} />
-    </ConnectedRouter>
-  </Provider>
-), document.getElementById('app'));
+const loadApplication = (Component) => {
+  render((
+    <AppContainer>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Route path="/" component={Component} />
+        </ConnectedRouter>
+      </Provider>
+    </AppContainer>
+  ), document.getElementById('app'));
+};
+
+
+loadApplication(App);
+
+
+if (module.hot) {
+  module.hot.accept('./containers/App', () => loadApplication(require('./containers/App').default));
+}

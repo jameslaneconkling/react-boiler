@@ -12,14 +12,10 @@ const DEV_PROXY = process.env.DEV_PROXY || 'http://localhost:3000';
 
 
 module.exports = {
-  // entry: [
-  //   `webpack-dev-server/client?http://${HOST}:${PORT}`,
-  //   'webpack/hot/only-dev-server',
-  //   './app/index.jsx',
-  // ],
   entry: {
     app: [
       'babel-polyfill',
+      'react-hot-loader/patch',
       './app/index.jsx',
     ],
   },
@@ -35,10 +31,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'app'),
-        use: [
-          'react-hot-loader',
-          'babel-loader',
-        ],
+        loader: 'babel-loader',
       },
       {
         test: /\.scss$/,
