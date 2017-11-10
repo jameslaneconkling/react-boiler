@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'index.js'
+    filename: 'index.js',
   },
 
   module: {
@@ -20,21 +20,21 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'app'),
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.scss$/,
         include: path.join(__dirname, 'app'),
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader!sass-loader?sourceMap'
-        })
+          use: 'css-loader!sass-loader?sourceMap',
+        }),
       },
       {
         test: /\.(woff2?|svg)$/,
-        loader: 'url-loader?limit=10000'
-      }
-    ]
+        loader: 'url-loader?limit=10000',
+      },
+    ],
   },
 
   plugins: [
@@ -44,15 +44,15 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production'),
       'process.env.__GIT_DESCRIPTION__': JSON.stringify(
         childProcess.execSync('git describe --always').toString()
-      )
+      ),
     }),
     new ExtractTextPlugin('style.css'),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
+        warnings: false,
       },
-      mangle: false
-    })
+      mangle: false,
+    }),
   ],
 
   devtool: 'source-map',
@@ -60,7 +60,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss'],
     alias: {
-      '@graphistry/falcor': path.resolve('./node_modules/@graphistry/falcor/dist/falcor.all.min.js')
-    }
-  }
+      '@graphistry/falcor': path.resolve('./node_modules/@graphistry/falcor/dist/falcor.all.min.js'),
+    },
+  },
 };
