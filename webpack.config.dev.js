@@ -12,11 +12,12 @@ const DEV_PROXY = process.env.DEV_PROXY || 'http://localhost:3000';
 
 
 module.exports = {
-  entry: [
-    `webpack-dev-server/client?http://${HOST}:${PORT}`,
-    'webpack/hot/only-dev-server',
-    './app/index.jsx',
-  ],
+  // entry: [
+  //   `webpack-dev-server/client?http://${HOST}:${PORT}`,
+  //   'webpack/hot/only-dev-server',
+  //   './app/index.jsx',
+  // ],
+  entry: './app/index.jsx',
 
   output: {
     path: path.join(__dirname, 'dist'),
@@ -47,6 +48,7 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({ template: 'app/index.html', inject: 'body' }),
     new CopyWebpackPlugin([{ from: 'app/assets', to: 'assets' }]),
     new webpack.DefinePlugin({
@@ -55,18 +57,21 @@ module.exports = {
         childProcess.execSync('git describe --always').toString()
       ),
     }),
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
 
   devtool: 'eval-source-map',
 
   devServer: {
+    contentBase: './dist',
+    host: HOST,
+    port: PORT,
     historyApiFallback: true,
     hot: true,
     inline: true,
+    clientLogLevel: 'none',
     stats: 'errors-only',
-    host: HOST,
-    port: PORT,
     proxy: {
       '/api/*': {
         target: DEV_PROXY,
@@ -78,8 +83,5 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss'],
-    alias: {
-      '@graphistry/falcor': path.resolve('./node_modules/@graphistry/falcor/dist/falcor.all.js'),
-    },
   },
 };

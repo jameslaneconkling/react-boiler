@@ -7,5 +7,8 @@ import {
 import App                 from '../../components/App';
 
 export default compose(
-  connect()
+  connect((state) => {
+    console.log(state.items, '');
+    return {};
+  })
 )(App);

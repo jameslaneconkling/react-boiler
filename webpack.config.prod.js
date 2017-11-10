@@ -38,6 +38,7 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({ template: 'app/index.html', inject: 'body' }),
     new CopyWebpackPlugin([{ from: 'app/assets', to: 'assets' }]),
     new webpack.DefinePlugin({
@@ -59,8 +60,5 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss'],
-    alias: {
-      '@graphistry/falcor': path.resolve('./node_modules/@graphistry/falcor/dist/falcor.all.min.js'),
-    },
   },
 };
