@@ -3,36 +3,22 @@
 import React                  from 'react';
 import { render }             from 'react-dom';
 import { AppContainer }       from 'react-hot-loader';
-import {
-  ConnectedRouter,
-}                             from 'react-router-redux';
-import {
-  Route,
-}                             from 'react-router';
-import { Provider }           from 'react-redux';
-import store, {
-  history,
-}                             from './redux/store';
-import App                    from './containers/App';
+import Root                   from './root';
 import                             './style.scss';
 
 
 const loadApplication = (Component) => {
   render((
-    <AppContainer>
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Route path="/" component={Component} />
-        </ConnectedRouter>
-      </Provider>
+    <AppContainer warnings={false}>
+      <Component />
     </AppContainer>
   ), document.getElementById('app'));
 };
 
 
-loadApplication(App);
+loadApplication(Root);
 
 
 if (module.hot) {
-  module.hot.accept('./containers/App', () => loadApplication(require('./containers/App').default));
+  module.hot.accept('./root', () => loadApplication(Root));
 }
