@@ -5,7 +5,9 @@
     "react-hot-loader/babel"
   ],
   "presets": [
-    "env",
+    ["env", {
+      "modules": false
+    }],
     "react"
   ]
 }
