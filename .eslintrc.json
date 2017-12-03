@@ -8,6 +8,7 @@
   ],
   "rules": {
     "no-multi-spaces": 0,
+    "function-paren-newline": 0,
     "comma-dangle": [
       "error",
       {
