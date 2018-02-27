@@ -9,6 +9,7 @@ A starter kit for react and redux, with a few bells and whistles, including
 
 ### Installation
 ```bash
+npm install -g parcel
 npm install
 ```
 
