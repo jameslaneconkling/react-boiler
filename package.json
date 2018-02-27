@@ -14,20 +14,18 @@
     "parcel"
   ],
   "scripts": {
-    "dev": "parcel app/index.html",
+    "dev": "node server.js",
     "lint": "eslint ./app/",
     "test": "node test/",
-    "build": "rm -r dist/ && parcel build app/index.html",
+    "build": "rm -r dist/ && parcel build app/index.html --public-url ./",
     "validate": "npm run test && npm run lint && npm run build"
   },
   "author": "James Conkling <james.lane.conkling@gmail.com> jameslaneconkling.github.io",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.11.1",
     "babel-register": "^6.26.0",
@@ -37,7 +35,10 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
-    "node-sass": "^4.6.0",
+    "express": "^4.16.2",
+    "http-proxy-middleware": "^0.17.4",
+    "node-sass": "^4.7.2",
+    "parcel-bundler": "^1.6.2",
     "tape": "^4.8.0"
   },
   "dependencies": {
