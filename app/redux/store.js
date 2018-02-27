@@ -16,16 +16,29 @@ import reducer                from './reducer';
 import epic                   from './epic';
 
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 export const history = createHistory();
 
-export default createStore(
-  reducer,
-  composeEnhancers(
-    applyMiddleware(
-      createEpicMiddleware(epic),
-      routerMiddleware(history)
-    ),
-  )
-);
+const makeStore = () => {
+  if ((process.env.NODE_ENV === 'development') && window.store) {
+    return window.store;
+  }
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const store = createStore(
+    reducer,
+    composeEnhancers(
+      applyMiddleware(
+        createEpicMiddleware(epic),
+        routerMiddleware(history)
+      ),
+    )
+  );
+
+  if (process.env.NODE_ENV === 'development') {
+    window.store = store;
+  }
+
+  return store;
+};
+
+export default makeStore();
