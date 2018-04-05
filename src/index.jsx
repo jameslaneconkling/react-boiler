@@ -12,6 +12,7 @@ import store, {
   history,
 }                             from './redux/store';
 import App                    from './components/App';
+import './style.scss';
 
 
 render((

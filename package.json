@@ -11,13 +11,13 @@
     "es6",
     "react",
     "redux",
-    "parcel"
+    "webpack"
   ],
   "scripts": {
-    "dev": "node server.js",
+    "dev": "webpack --mode development --progress",
     "lint": "eslint ./app/",
     "test": "node test/",
-    "build": "rm -r dist/ && parcel build app/index.html --public-url ./",
+    "build": "webpack --mode production --progress",
     "validate": "npm run test && npm run lint && npm run build"
   },
   "author": "James Conkling <james.lane.conkling@gmail.com> jameslaneconkling.github.io",
@@ -29,19 +29,26 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.11.1",
     "babel-register": "^6.26.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.11",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
-    "express": "^4.16.2",
-    "http-proxy-middleware": "^0.17.4",
-    "node-sass": "^4.7.2",
-    "parcel-bundler": "^1.6.2",
-    "tape": "^4.8.0"
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "tape": "^4.8.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "history": "^4.7.2",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",
