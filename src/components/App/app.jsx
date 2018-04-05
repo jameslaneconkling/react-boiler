@@ -5,7 +5,7 @@ import {
 
 
 export default () => (
-  <div>
+  <div className="app">
     <h1>REACT REDUX BOILER</h1>
     <pre>2 + 2 = {add(2, 2)}</pre>
   </div>

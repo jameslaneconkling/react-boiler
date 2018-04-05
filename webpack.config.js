@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 module.exports = {
@@ -16,21 +17,12 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'src'),
-        use: {
-          loader: 'babel-loader',
-          // options: {
-          //   presets: ['@babel/preset-env']
-          // }
-        }
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: { loader: 'babel-loader' }
       },
       {
         test: /\.scss$/,
         use: [
-          { loader: "style-loader" }, // creates style nodes from JS strings
+          MiniCssExtractPlugin.loader,
           { loader: "css-loader" }, // translates CSS into CommonJS
           { loader: "sass-loader" } // compiles Sass to CSS
         ]
@@ -48,6 +40,7 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(['dist']),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({ template: 'src/index.html' })
   ],
   
