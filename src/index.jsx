@@ -11,14 +11,25 @@ import { Provider }           from 'react-redux';
 import store, {
   history,
 }                             from './redux/store';
-import App                    from './components/App';
+import App                    from './containers/App';
 import './style';
 
 
-render((
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Route path="/" component={App} />
-    </ConnectedRouter>
-  </Provider>
-), document.getElementById('app'));
+const renderApp = (Root) => {
+  render((
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Route path="/" component={Root} />
+      </ConnectedRouter>
+    </Provider>
+  ), document.getElementById('app'));
+};
+
+renderApp(App);
+
+
+if (module.hot) {
+  module.hot.accept('./containers/App', () => {
+    renderApp(require('./containers/App').default);
+  });
+}

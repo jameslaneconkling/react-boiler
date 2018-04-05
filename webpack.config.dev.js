@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -48,11 +49,14 @@ module.exports = {
     contentBase: './dist',
     host: HOST,
     port: PORT,
-    historyApiFallback: true
+    historyApiFallback: true,
+    hot: true
   },
 
   plugins: [
     new CleanWebpackPlugin(['dist']),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({ template: 'src/index.html' })
   ],

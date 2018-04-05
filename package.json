@@ -14,7 +14,7 @@
     "webpack"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --mode development --config webpack.config.dev.js --progress",
+    "dev": "webpack-dev-server --mode development --config webpack.config.dev.js --hotOnly --progress",
     "lint": "eslint ./app/",
     "test": "node test/",
     "build": "webpack --mode production --config webpack.config.prod.js --progress",
