@@ -16,7 +16,17 @@ module.exports = merge(common, {
     host: HOST,
     port: PORT,
     historyApiFallback: true,
-    hot: true
+    hot: true,
+    inline: true,
+    clientLogLevel: 'none',
+    stats: 'errors-only',
+    // proxy: {
+    //   '/api/*': {
+    //     target: DEV_PROXY,
+    //     secure: false,
+    //     changeOrigin: true,
+    //   },
+    // },
   },
 
   plugins: [
