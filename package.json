@@ -17,7 +17,7 @@
     "dev": "webpack-dev-server --mode development --config webpack.dev.js --hotOnly --progress",
     "lint": "eslint ./app/",
     "test": "node test/",
-    "build": "webpack --mode production --config webpack.config.js --progress",
+    "build": "webpack --mode production --config webpack.prod.js --progress",
     "validate": "npm run test && npm run lint && npm run build"
   },
   "author": "James Conkling <james.lane.conkling@gmail.com> jameslaneconkling.github.io",
