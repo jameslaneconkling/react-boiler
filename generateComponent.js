@@ -47,24 +47,24 @@ const styleTemplate = `\
 `;
 
 
-fs.mkdir(`${__dirname}/app/components/${name}`, (err) => {
+fs.mkdir(`${__dirname}/src/components/${name}`, (err) => {
   if (err) {
     console.error(err);
     process.exit(1);
   }
 
   fs.writeFileSync(
-    `${__dirname}/app/components/${name}/${nameCamelCase}.jsx`,
+    `${__dirname}/src/components/${name}/${nameCamelCase}.jsx`,
     componentTemplate
   );
 
   fs.writeFileSync(
-    `${__dirname}/app/components/${name}/index.js`,
+    `${__dirname}/src/components/${name}/index.js`,
     indexTemplate
   );
 
   fs.writeFileSync(
-    `${__dirname}/app/components/${name}/style.scss`,
+    `${__dirname}/src/components/${name}/style.scss`,
     styleTemplate
   );
 });
