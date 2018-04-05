@@ -1,5 +1,5 @@
 import test from 'tape';
-import { identity } from '../app/utils/utils';
+import { identity } from '../src/utils/utils';
 
 test('placeholder', (t) => {
   t.plan(1);
