@@ -35,19 +35,19 @@ export default ${name};
 `;
 
 
-fs.mkdir(`${__dirname}/app/containers/${name}`, (err) => {
+fs.mkdir(`${__dirname}/src/containers/${name}`, (err) => {
   if (err) {
     console.error(err);
     process.exit(1);
   }
 
   fs.writeFileSync(
-    `${__dirname}/app/containers/${name}/${nameCamelCase}.jsx`,
+    `${__dirname}/src/containers/${name}/${nameCamelCase}.jsx`,
     containerTemplate
   );
 
   fs.writeFileSync(
-    `${__dirname}/app/containers/${name}/index.js`,
+    `${__dirname}/src/containers/${name}/index.js`,
     indexTemplate
   );
 });
