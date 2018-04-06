@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --mode development --config webpack.dev.js --hotOnly --progress",
-    "lint": "eslint ./app/",
+    "lint": "eslint ./src --ext .js --ext .jsx",
     "test": "node test/",
     "build": "webpack --mode production --config webpack.prod.js --progress",
     "validate": "npm run test && npm run lint && npm run build"
