@@ -1,4 +1,5 @@
 /* global document */
+/* eslint-disable global-require */
 import React from 'react';
 import { render } from 'react-dom';
 import {
@@ -12,7 +13,7 @@ import store, {
   history,
 } from './redux/store';
 import App from './containers/App';
-import './style';
+import './style.scss';
 
 
 const renderApp = (Root) => {
