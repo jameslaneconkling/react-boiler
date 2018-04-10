@@ -24,7 +24,7 @@ module.exports = {
         use: { loader: 'babel-loader' }
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [
           MiniCssExtractPlugin.loader,
           { loader: "css-loader" }, // translates CSS into CommonJS
