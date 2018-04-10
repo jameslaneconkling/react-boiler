@@ -4,16 +4,16 @@ import {
   createStore,
   applyMiddleware,
   compose,
-}                             from 'redux';
-import createHistory          from 'history/createBrowserHistory';
+} from 'redux';
+import createHistory from 'history/createBrowserHistory';
 import {
   routerMiddleware,
-}                             from 'react-router-redux';
+} from 'react-router-redux';
 import {
   createEpicMiddleware,
-}                             from 'redux-observable';
-import reducer                from './reducer';
-import epic                   from './epic';
+} from 'redux-observable';
+import reducer from './reducer';
+import epic from './epic';
 
 
 export const history = createHistory();

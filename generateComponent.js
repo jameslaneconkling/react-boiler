@@ -14,9 +14,9 @@ if (!name) {
 
 
 const componentTemplate = `\
-import React                   from 'react';
-import {}                      from 'prop-types';
-import                              './style.scss';
+import React from 'react';
+import {} from 'prop-types';
+import './style.scss';
 
 
 const ${name} = () => (

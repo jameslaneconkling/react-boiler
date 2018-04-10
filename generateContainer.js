@@ -20,8 +20,8 @@ if (!name) {
 const containerTemplate = `\
 import {
   compose,
-}                          from 'recompose';
-import ${componentName}             from '../../components/${componentName}';
+} from 'recompose';
+import ${componentName} from '../../components/${componentName}';
 
 
 export default compose()(${componentName});

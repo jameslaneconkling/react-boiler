@@ -1,10 +1,10 @@
 import {
   connect,
-}                          from 'react-redux';
+} from 'react-redux';
 import {
   compose,
-}                          from 'recompose';
-import App                 from '../../components/App';
+} from 'recompose';
+import App from '../../components/App';
 
 
 export default compose(

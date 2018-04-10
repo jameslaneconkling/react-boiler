@@ -1,6 +1,6 @@
-import { Observable }    from 'rxjs/Observable';
-import                        'rxjs/add/operator/switchMap';
-import                        'rxjs/add/observable/empty';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/empty';
 
 /**
  * constants
