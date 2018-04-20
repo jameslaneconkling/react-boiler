@@ -42,7 +42,7 @@ fs.mkdir(`${__dirname}/src/containers/${name}`, (err) => {
   }
 
   fs.writeFileSync(
-    `${__dirname}/src/containers/${name}/${nameCamelCase}.jsx`,
+    `${__dirname}/src/containers/${name}/${nameCamelCase}.js`,
     containerTemplate
   );
 
