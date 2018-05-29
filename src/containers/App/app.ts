@@ -4,7 +4,7 @@ import {
 import {
   compose,
 } from 'recompose';
-import App from '../../components/App';
+import App from '../../components/App/index';
 
 
 export default compose(

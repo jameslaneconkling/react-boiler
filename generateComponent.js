@@ -15,7 +15,6 @@ if (!name) {
 
 const componentTemplate = `\
 import React from 'react';
-import {} from 'prop-types';
 import './style.scss';
 
 
@@ -26,8 +25,6 @@ const ${name} = () => (
   </div>
 );
 
-
-${name}.propTypes = {};
 
 export default ${name};
 `;
@@ -54,12 +51,12 @@ fs.mkdir(`${__dirname}/src/components/${name}`, (err) => {
   }
 
   fs.writeFileSync(
-    `${__dirname}/src/components/${name}/${nameCamelCase}.jsx`,
+    `${__dirname}/src/components/${name}/${nameCamelCase}.tsx`,
     componentTemplate
   );
 
   fs.writeFileSync(
-    `${__dirname}/src/components/${name}/index.js`,
+    `${__dirname}/src/components/${name}/index.ts`,
     indexTemplate
   );
 
