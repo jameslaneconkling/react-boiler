@@ -1,9 +1,10 @@
 import React from 'react';
+import { hot } from 'react-hot-loader';
 import {
   add,
   identity,
 } from '../../utils/utils';
-import './style';
+import './style.scss';
 
 
 const App: React.StatelessComponent<{}> = () => (
@@ -13,4 +14,5 @@ const App: React.StatelessComponent<{}> = () => (
   </div>
 );
 
-export default App;
+
+export default hot(module)(App);

@@ -14,7 +14,7 @@
     "webpack"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --mode development --config webpack.dev.js --hotOnly --progress",
+    "dev": "webpack-dev-server --mode development --config webpack.dev.js --hot --progress",
     "lint": "tslint --config ./tslint.json --project ./tsconfig.json --format stylish",
     "test": "node test/",
     "build": "webpack --mode production --config webpack.prod.js --progress",
@@ -55,6 +55,7 @@
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^6.0.7",
+    "style-loader": "^0.21.0",
     "tape": "^4.8.0",
     "ts-loader": "^4.3.0",
     "tslint": "^5.10.0",
@@ -73,6 +74,7 @@
     "ramda": "^0.25.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-hot-loader": "^4.2.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",

@@ -26,7 +26,3 @@ render((
     </ConnectedRouter>
   </Provider>
 ), document.getElementById('app'));
-
-if ((module as any).hot) {
-  (module as any).hot.accept();
-}
