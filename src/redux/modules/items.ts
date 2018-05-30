@@ -4,7 +4,7 @@ import {
 } from 'ramda';
 import { Action as ReduxAction } from 'redux';
 import {
-  Epic,
+  Epic as IEpic,
   ofType,
 } from 'redux-observable';
 import {
@@ -14,8 +14,8 @@ import {
   switchMap,
 } from 'rxjs/operators';
 import {
-  State,
-  Action,
+  IState,
+  IAction,
 } from '../reducer';
 
 
@@ -23,14 +23,14 @@ import {
  * types
  */
 // export type Status = 'complete' | 'error' | 'pending';
-export interface Item {
+export interface IItem {
   id: string;
   title: string;
 }
-export type ItemsAction = FetchItemsAction
-  | FetchItemsSuccessAction
-  | FetchItemsErrorAction;
-export interface ItemsState {
+export type IItemsAction = IFetchItemsAction
+  | IFetchItemsSuccessAction
+  | IFetchItemsErrorAction;
+export interface IItemsState {
   status: string;
   // TODO
   // status: Status;
@@ -48,30 +48,30 @@ export const FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR';
 /**
  * action creators
  */
-interface FetchItemsAction extends ReduxAction {
+interface IFetchItemsAction extends ReduxAction {
   type: typeof FETCH_ITEMS;
   query: string;
 }
-export const fetchItems = (query: string): FetchItemsAction => ({
+export const fetchItems = (query: string): IFetchItemsAction => ({
   type: FETCH_ITEMS,
   query,
 });
 
-interface FetchItemsSuccessAction {
+interface IFetchItemsSuccessAction {
   type: typeof FETCH_ITEMS_SUCCESS;
   query: string;
-  items: Item[];
+  items: IItem[];
 }
-export const fetchItemsSuccess = (query: string, items: Item[]): FetchItemsSuccessAction => ({
+export const fetchItemsSuccess = (query: string, items: IItem[]): IFetchItemsSuccessAction => ({
   type: FETCH_ITEMS_SUCCESS, query, items,
 });
 
-interface FetchItemsErrorAction {
+interface IFetchItemsErrorAction {
   type: typeof FETCH_ITEMS_ERROR;
   query: string;
   error: string;
 }
-export const fetchItemsError = (query: string, error: string): FetchItemsErrorAction => ({
+export const fetchItemsError = (query: string, error: string): IFetchItemsErrorAction => ({
   type: FETCH_ITEMS_ERROR, query, error,
 });
 
@@ -80,27 +80,21 @@ export const fetchItemsError = (query: string, error: string): FetchItemsErrorAc
  * reducer
  */
 export default (
-  state: ItemsState = {
+  state: IItemsState = {
     status: 'complete',
   },
-  action: Action
-): ItemsState => {
+  action: IAction
+): IItemsState => {
+  // TODO can infer return type?
   if (action.type === FETCH_ITEMS) {
-    // TODO - replace with assoc
-    return {
-      ...state,
-      status: 'pending',
-    };
+    return assoc('status', 'pending', state);
   } else if (action.type === FETCH_ITEMS_SUCCESS) {
     return pipe(
       assoc('status', 'complete'),
       assoc('data', action.items)
     )(state);
   } else if (action.type === FETCH_ITEMS_ERROR) {
-    return {
-      ...state,
-      status: 'error',
-    };
+    return assoc('status', 'error', state);
   }
 
   return state;
@@ -110,7 +104,7 @@ export default (
 /**
  * epics
  */
-export const noopEpic: Epic<Action, State> = (action$) => action$.pipe(
+export const noopEpic: IEpic<IAction, IState> = (action$) => action$.pipe(
   ofType(FETCH_ITEMS),
   switchMap(() => empty())
 );

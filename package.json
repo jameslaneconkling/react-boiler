@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --mode development --config webpack.dev.js --hotOnly --progress",
-    "lint": "eslint ./src --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "lint": "tslint --config ./tslint.json --project ./tsconfig.json --format stylish",
     "test": "node test/",
     "build": "webpack --mode production --config webpack.prod.js --progress",
     "validate": "npm run test && npm run lint && npm run build"
@@ -57,6 +57,9 @@
     "sass-loader": "^6.0.7",
     "tape": "^4.8.0",
     "ts-loader": "^4.3.0",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^2.8.3",
     "typescript-eslint-parser": "^15.0.0",
     "webpack": "^4.10.1",

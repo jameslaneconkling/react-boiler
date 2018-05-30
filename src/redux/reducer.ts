@@ -1,25 +1,28 @@
-import { combineReducers } from 'redux';
+import {
+  combineReducers,
+  Reducer as IReducer,
+} from 'redux';
 import {
   routerReducer,
-  RouterState,
-  RouterAction,
+  RouterState as IRouterState,
+  RouterAction as IRouterAction,
 } from 'react-router-redux';
 import items, {
-  ItemsState,
-  ItemsAction,
+  IItemsState,
+  IItemsAction,
 } from './modules/items';
 
 
-export interface State {
-  items: ItemsState;
-  routing: RouterState;
+export interface IState {
+  items: IItemsState;
+  routing: IRouterState;
 }
 
-export type Action = ItemsAction
-  | RouterAction;
+export type IAction = IItemsAction
+  | IRouterAction;
 
 
 export default combineReducers({
   items,
-  routing: (routerReducer as any),
+  routing: (routerReducer as IReducer<IRouterState>),
 });
