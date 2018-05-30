@@ -7,7 +7,7 @@ import {
 } from 'react-router-redux';
 import {
   Route,
-} from 'react-router';
+} from "react-router-dom";
 import { Provider } from 'react-redux';
 import store, {
   history,

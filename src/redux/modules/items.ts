@@ -84,8 +84,7 @@ export default (
     status: 'complete',
   },
   action: IAction
-): IItemsState => {
-  // TODO can infer return type?
+) => {
   if (action.type === FETCH_ITEMS) {
     return assoc('status', 'pending', state);
   } else if (action.type === FETCH_ITEMS_SUCCESS) {
