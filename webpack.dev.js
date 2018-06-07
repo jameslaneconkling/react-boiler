@@ -6,7 +6,7 @@ const common = require('./webpack.common.js');
 
 const HOST = 'localhost';
 const PORT = '4000';
-// const DEV_PROXY = process.env.DEV_PROXY || 'http://localhost:8080';
+// const API_PROXY = process.env.API_PROXY || 'http://localhost:8080';
 
 
 module.exports = merge(common, {
@@ -36,7 +36,7 @@ module.exports = merge(common, {
     stats: 'errors-only',
     // proxy: {
     //   '/api/*': {
-    //     target: DEV_PROXY,
+    //     target: API_PROXY,
     //     secure: false,
     //     changeOrigin: true,
     //   },

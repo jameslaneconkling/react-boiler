@@ -1,6 +1,6 @@
 import {
   combineReducers,
-  Reducer as IReducer,
+  Reducer,
 } from 'redux';
 import {
   routerReducer,
@@ -24,5 +24,5 @@ export type IAction = IItemsAction
 
 export default combineReducers({
   items,
-  routing: (routerReducer as IReducer<IRouterState>),
+  routing: (routerReducer as Reducer<IRouterState>),
 });
