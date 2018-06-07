@@ -14,11 +14,15 @@ if (!name) {
 
 
 const componentTemplate = `\
-import React from 'react';
+import React, {
+  SFC
+} from 'react';
 import './style.scss';
 
 
-const ${name} = () => (
+interface I${name} {}
+
+const ${name}: SFC<I${name}> = () => (
   <div
     className="${nameSnakeCase}"
   >
@@ -31,9 +35,7 @@ export default ${name};
 
 
 const indexTemplate = `\
-import ${name} from './${nameCamelCase}';
-
-export default ${name};
+export { default } from './${nameCamelCase}';
 `;
 
 

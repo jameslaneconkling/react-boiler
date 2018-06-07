@@ -23,15 +23,16 @@ import {
 } from 'recompose';
 import ${componentName} from '../../components/${componentName}';
 
+export interface I${name} {}
 
-export default compose()(${componentName});
+export type I${componentName} = I${name};
+
+export default compose<I${componentName}, I${name}>()(${componentName});
 `;
 
 
 const indexTemplate = `\
-import ${name} from './${nameCamelCase}';
-
-export default ${name};
+export { default } from './${nameCamelCase}';
 `;
 
 
