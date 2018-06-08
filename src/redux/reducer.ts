@@ -2,11 +2,7 @@ import {
   combineReducers,
   Reducer,
 } from 'redux';
-import {
-  routerReducer,
-  RouterState as IRouterState,
-  RouterAction as IRouterAction,
-} from 'react-router-redux';
+import { RouterState } from 'connected-react-router';
 import items, {
   IItemsState,
   IItemsAction,
@@ -15,14 +11,12 @@ import items, {
 
 export interface IState {
   items: IItemsState;
-  routing: IRouterState;
+  routing: RouterState;
 }
 
-export type IAction = IItemsAction
-  | IRouterAction;
+export type IAction = IItemsAction;
 
 
 export default combineReducers({
   items,
-  routing: (routerReducer as Reducer<IRouterState>),
 });

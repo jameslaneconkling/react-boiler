@@ -1,5 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
+const webpack = require('webpack');
 const path = require('path');
+const childProcess = require('child_process');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -45,6 +47,11 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new webpack.DefinePlugin({
+      'process.env.__GIT_DESCRIPTION__': JSON.stringify(
+        childProcess.execSync('git describe --always').toString()
+      ),
+    }),
   ],
 
   resolve: {

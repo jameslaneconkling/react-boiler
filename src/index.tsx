@@ -2,9 +2,7 @@
 /* eslint-disable global-require */
 import React from 'react';
 import { render } from 'react-dom';
-import {
-  ConnectedRouter,
-} from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import {
   Route,
 } from "react-router-dom";
@@ -15,6 +13,7 @@ import store, {
 import App from './containers/App/';
 import './style';
 
+console.log('*', process.env.__GIT_DESCRIPTION__);
 
 render((
   <Provider store={store}>
