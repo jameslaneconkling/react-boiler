@@ -25,7 +25,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/history": "^4.6.2",
-    "@types/ramda": "^0.25.28",
+    "@types/ramda": "github:types/npm-ramda#dist",
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
     "@types/react-redux": "^6.0.0",
