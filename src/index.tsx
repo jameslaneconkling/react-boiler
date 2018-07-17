@@ -1,27 +1,27 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ConnectedRouter } from 'connected-react-router';
+// import { hot } from 'react-hot-loader';
+import { ApolloProvider } from 'react-apollo';
 import {
+  BrowserRouter,
   Route,
-} from "react-router-dom";
-import { Provider } from 'react-redux';
-import store, {
-  history,
-} from './redux/store';
+} from 'react-router-dom';
+import client from './graphql/client';
 import App from './containers/AppContainer';
 import './style';
 
-console.log('*', process.env.__GIT_DESCRIPTION__);
+
+console.log('-----------\n', process.env.__GIT_DESCRIPTION__ + '-----------');
 
 render((
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
+  <BrowserRouter>
+    <ApolloProvider client={client}>
       <Route
         path="/"
         component={App}
       />
-    </ConnectedRouter>
-  </Provider>
+    </ApolloProvider>
+  </BrowserRouter>
 ), document.getElementById('app'));
 
 if (module.hot) {

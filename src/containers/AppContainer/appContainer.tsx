@@ -1,10 +1,9 @@
-import React from 'react';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent, SFC } from 'react';
 import {
   compose, withHandlers, branch, renderComponent, renderNothing, mapProps,
 } from 'recompose';
-import { MutateProps } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql, ChildMutateProps, MutateProps, DataProps } from 'react-apollo';
+import gql from "graphql-tag";
 import App from '../../components/App';
 import { hot } from 'react-hot-loader';
 import { graphqlQuery, graphqlMutation, QueryResponse, QueryProps, QueryDataResponse } from '../../graphql/react';
@@ -67,11 +66,11 @@ export const renderEmpty = branch<QueryProps<QueryResponse>>(
 );
 export const renderLoading = branch<QueryProps<QueryResponse>>(
   ({ query: { type } }) => type === 'LOADING',
-  renderComponent(() => React.createElement('div', null, 'loading...'))
+  renderComponent(() => <div>loading</div>)
 );
 export const renderError = branch<QueryProps<QueryResponse>>(
   ({ query: { type } }) => type === 'ERROR',
-  renderComponent(() => React.createElement('div', null, 'ERROR'))
+  renderComponent(() => <div>error</div>)
 );
 
 export const handleNonDataStates = compose(renderEmpty, renderLoading, renderError);
@@ -80,14 +79,14 @@ export const handleNonDataStates = compose(renderEmpty, renderLoading, renderErr
 type ContainerProps = {}
 type MapProps = { currency: string }
 
-export type Props =
+export type AppProps =
   & ContainerProps
   & MapProps
   & QueryProps<QueryResponse<RatesQueryResponse>>
   & CurrencyMutationResponse
   & Handlers
 
-const AppContainer = compose<Props, ContainerProps>(
+const AppContainer = compose<AppProps, ContainerProps>(
   graphqlQuery(CURRENCY_QUERY),
   handleNonDataStates,
   mapProps<
