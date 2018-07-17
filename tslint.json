@@ -5,7 +5,14 @@
   "rules": {
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "no-console": false
+    "no-console": false,
+    "no-unused-variable": true,
+    "interface-over-type-literal": false,
+    "no-shadowed-variable": false,
+    "no-unused-expression": true,
+    "member-ordering": false,
+    "no-empty": false,
+    "variable-name": [true, "ban-keywords", "allow-leading-underscore", "allow-pascal-case"]
   },
   "rulesDirectory": []
 }

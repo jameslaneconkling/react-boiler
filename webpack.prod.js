@@ -19,6 +19,19 @@ module.exports = merge(common, {
     ],
   },
 
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
+
   devtool: 'source-map',
 
   plugins: [
@@ -29,5 +42,6 @@ module.exports = merge(common, {
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css',
     }),
+    new webpack.HashedModuleIdsPlugin(),
   ],
 });
