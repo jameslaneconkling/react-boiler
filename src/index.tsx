@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import store, {
   history,
 } from './redux/store';
-import App from './containers/App/';
+import App from './containers/AppContainer';
 import './style';
 
 console.log('*', process.env.__GIT_DESCRIPTION__);

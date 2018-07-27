@@ -1,8 +1,6 @@
 const fs = require('fs');
 
 const name = process.argv[2];
-const nameCamelCase = name.replace(/^[A-Z]/, l => l.toLowerCase());
-const nameSnakeCase = name.replace(/[A-Z]/g, l => `-${l.toLowerCase()}`).replace(/^-/, '');
 
 if (!name) {
   console.error('Missing component name as first and only command argument');
@@ -12,17 +10,18 @@ if (!name) {
   process.exit(1);
 }
 
+const nameCamelCase = name.replace(/^[A-Z]/, l => l.toLowerCase());
+const nameSnakeCase = name.replace(/[A-Z]/g, l => `-${l.toLowerCase()}`).replace(/^-/, '');
+
 
 const componentTemplate = `\
-import React, {
-  SFC
-} from 'react';
+import React, { SFC } from 'react';
 import './style.scss';
 
 
-interface I${name} {}
+type Props = {}
 
-const ${name}: SFC<I${name}> = () => (
+const ${name}: SFC<Props> = () => (
   <div
     className="${nameSnakeCase}"
   >
