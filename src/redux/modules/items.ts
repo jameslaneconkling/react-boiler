@@ -7,7 +7,6 @@ import {
 } from 'ramda';
 import {
   Reducer,
-  Action,
 } from 'redux';
 import {
   Epic,
@@ -23,30 +22,31 @@ import {
   delay,
 } from 'rxjs/operators';
 import {
-  IState,
-  IAction,
+  State,
+  Action,
 } from '../reducer';
+import { ActionCreator } from '../../types';
 
 
 /* types */
-export interface IItem {
+export interface Item {
   id: string
   title: string
 }
-export type IStatus = 'complete' | 'error' | 'pending'
-export type IItemsAction = IFetchItems
-  | IFetchItemsSuccess
-  | IFetchItemsError
-export interface IItemsState {
-  status: IStatus
-  data?: IItem[]
+export type Status = 'complete' | 'error' | 'pending'
+export type ItemsAction = FetchItemsAction
+  | FetchItemsSuccessAction
+  | FetchItemsErrorAction
+export interface ItemsState {
+  status: Status
+  data?: Item[]
 }
 
 
 /* selectors */
 type Selector<S, T> = (state: S, ...params: any[]) => T
 
-export const getItem: Selector<IState, IItem | undefined> = (state, id) => pipe(
+export const getItem: Selector<State, Item | undefined> = (state, id) => pipe(
   pathOr([], ['items', 'data']),
   find(equals(id))
 )(state);
@@ -58,31 +58,27 @@ export const FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS';
 export const FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR';
 
 
+export type FetchItemsAction = ReturnType<typeof fetchItems>
+export const fetchItems: ActionCreator<
+  typeof FETCH_ITEMS,
+  { query: string }
+> = (props): FetchItemsAction => ({ type: FETCH_ITEMS, props });
 
-interface IFetchItems extends Action<typeof FETCH_ITEMS> {
-  query: string
-}
-export const fetchItems = (query: string): IFetchItems => ({
-  type: FETCH_ITEMS, query,
-});
+export type FetchItemsSuccessAction = ReturnType<typeof fetchItemsSuccess>
+export const fetchItemsSuccess: ActionCreator<
+  typeof FETCH_ITEMS_SUCCESS,
+  { query: string, items: Item[] }
+> = (props): FetchItemsSuccessAction => ({ type: FETCH_ITEMS_SUCCESS, props });
 
-interface IFetchItemsSuccess extends Action<typeof FETCH_ITEMS_SUCCESS> {
-  query: string, items: IItem[]
-}
-export const fetchItemsSuccess = (query: string, items: IItem[]): IFetchItemsSuccess => ({
-  type: FETCH_ITEMS_SUCCESS, query, items,
-});
-
-interface IFetchItemsError extends Action<typeof FETCH_ITEMS_ERROR> {
-  query: string, error: string
-}
-export const fetchItemsError = (query: string, error: string): IFetchItemsError => ({
-  type: FETCH_ITEMS_ERROR, query, error,
-});
+export type FetchItemsErrorAction = ReturnType<typeof fetchItemsError>
+export const fetchItemsError: ActionCreator<
+  typeof FETCH_ITEMS_ERROR,
+  { query: string, error: string }
+> = (props): FetchItemsErrorAction => ({ type: FETCH_ITEMS_ERROR, props });
 
 
 /* reducer */
-const reducer: Reducer<IItemsState, IAction> = ( // TODO - can this be Action? 
+const reducer: Reducer<ItemsState, Action> = (
   state = {
     status: 'complete',
   },
@@ -92,8 +88,8 @@ const reducer: Reducer<IItemsState, IAction> = ( // TODO - can this be Action?
     return assoc('status', 'pending', state);
   } else if (action.type === FETCH_ITEMS_SUCCESS) {
     return pipe(
-      assoc('status', 'complete' as IStatus),
-      assoc('data', action.items),
+      assoc('status', 'complete' as Status),
+      assoc('data', action.props.items),
     )(state);
   } else if (action.type === FETCH_ITEMS_ERROR) {
     return assoc('status', 'error', state);
@@ -106,13 +102,13 @@ export default reducer;
 
 
 /* epics */
-export const noopEpic: Epic<IAction, IState> = (action$) => action$.pipe(
-  ofType<IAction, IFetchItems>(FETCH_ITEMS),
-  switchMap(({ query }) => (
+export const noopEpic: Epic<Action, State> = (action$) => action$.pipe(
+  ofType<Action, FetchItemsAction>(FETCH_ITEMS),
+  switchMap(({ props: { query } }) => (
     of([{ id: '1', title: 'thing1' }, { id: '2', title: 'thing2' }]).pipe(
       delay(1000),
-      map((items) => fetchItemsSuccess(query, items)),
-      catchError((error) => of(fetchItemsError(query, error)))
+      map((items) => fetchItemsSuccess({ query, items })),
+      catchError((error) => of(fetchItemsError({ query, error })))
     )
   ))
 );

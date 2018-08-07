@@ -3,17 +3,17 @@ import {
 } from 'redux';
 import { RouterState } from 'connected-react-router';
 import items, {
-  IItemsState,
-  IItemsAction,
+  ItemsState,
+  ItemsAction,
 } from './modules/items';
 
 
-export interface IState {
-  items: IItemsState;
+export type State = {
+  items: ItemsState;
   routing: RouterState;
 }
 
-export type IAction = IItemsAction;
+export type Action = ItemsAction;
 
 
 export default combineReducers({
