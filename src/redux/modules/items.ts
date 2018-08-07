@@ -3,13 +3,11 @@ import {
   pipe,
   find,
   equals,
-  path,
   pathOr,
 } from 'ramda';
 import {
   Reducer,
   Action,
-  ActionCreator,
 } from 'redux';
 import {
   Epic,
@@ -17,7 +15,6 @@ import {
 } from 'redux-observable';
 import {
   of,
-  empty,
 } from 'rxjs';
 import {
   switchMap,

@@ -2,6 +2,8 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CspHtmlWebpackPlugin = require('csp-html-webpack-plugin');
 const common = require('./webpack.common.js');
 
 
@@ -37,6 +39,14 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new CspHtmlWebpackPlugin({
+      'default-src': "'self'",
+      'base-uri': "'self'",
+      'object-src': "'none'",
+      'script-src': "'self'",
+      'style-src': "'self'",
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',

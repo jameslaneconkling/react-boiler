@@ -2,6 +2,8 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CspHtmlWebpackPlugin = require('csp-html-webpack-plugin');
 const common = require('./webpack.common.js');
 
 const HOST = 'localhost';
@@ -45,6 +47,15 @@ module.exports = merge(common, {
 
   plugins: [
     new webpack.NamedModulesPlugin(),
+    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new CspHtmlWebpackPlugin({
+      'default-src': "'self'",
+      'base-uri': "'self'",
+      'object-src': "'none'",
+      'script-src': ["'unsafe-eval'", "'self'"],
+      'style-src': ["'unsafe-inline'", "'self'"],
+      'connect-src': ["'self'", `ws://${HOST}:${PORT}`],
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',

@@ -1,6 +1,5 @@
 import {
   combineReducers,
-  Reducer,
 } from 'redux';
 import { RouterState } from 'connected-react-router';
 import items, {
