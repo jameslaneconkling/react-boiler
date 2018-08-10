@@ -46,7 +46,7 @@ module.exports = merge(common, {
       'base-uri': "'self'",
       'object-src': "'none'",
       'script-src': "'self'",
-      'style-src': "'self'",
+      'style-src': ["'self'", "'unsafe-inline'"],
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
