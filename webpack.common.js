@@ -47,7 +47,7 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new webpack.DefinePlugin({
       'process.env.__GIT_DESCRIPTION__': JSON.stringify(
-        childProcess.execSync('git describe --always').toString()
+        childProcess.execSync('git describe --long --always').toString()
       ),
     }),
   ],
