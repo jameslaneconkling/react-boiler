@@ -102,7 +102,7 @@ export default reducer;
 
 
 /* epics */
-export const noopEpic: Epic<Action, State> = (action$) => action$.pipe(
+export const noopEpic: Epic<Action, Action, State> = (action$) => action$.pipe(
   ofType<Action, FetchItemsAction>(FETCH_ITEMS),
   switchMap(({ props: { query } }) => (
     of([{ id: '1', title: 'thing1' }, { id: '2', title: 'thing2' }]).pipe(

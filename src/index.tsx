@@ -1,5 +1,3 @@
-/* global document */
-/* eslint-disable global-require */
 import React from 'react';
 import { render } from 'react-dom';
 import { ConnectedRouter } from 'connected-react-router';
@@ -26,6 +24,6 @@ render((
   </Provider>
 ), document.getElementById('app'));
 
-if ((module as any).hot) {
-  (module as any).hot.accept();
+if (module.hot) {
+  module.hot.accept();
 }
