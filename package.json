@@ -61,14 +61,14 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "connected-react-router": "^4.3.0",
+    "connected-react-router": "^4.4.1",
     "history": "^4.7.2",
-    "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-hot-loader": "^4.3.4",
     "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "recompose": "^0.26.0",
     "redux": "^4.0.0",
