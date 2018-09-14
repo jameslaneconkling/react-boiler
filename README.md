@@ -23,8 +23,3 @@ npm run dev
 ```bash
 npm run validate
 ```
-
-### Known Issues
-- eslint fails to parse generic type declarations [see here](https://github.com/eslint/typescript-eslint-parser/issues/399) 
-  - switching to tslint might solve
-  - or alternatively, stop using jsx
