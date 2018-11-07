@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 const childProcess = require('child_process');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -45,6 +46,7 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(['dist']),
+    new CopyWebpackPlugin([{ from: 'src/assets', to: 'assets' }]),
     new webpack.DefinePlugin({
       'process.env.__GIT_DESCRIPTION__': JSON.stringify(
         childProcess.execSync('git describe --long --always').toString()
