@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development --config webpack.dev.js --hot --progress",
     "lint": "tslint --config ./tslint.json --project ./tsconfig.json --format stylish",
-    "tsc": "tsc --project ./tsconfig.json",
+    "tsc": "tsc --project ./tsconfig.json --outDir ./dist",
     "test": "node test/",
     "validate": "npm run test && npm run lint",
     "build": "webpack --mode production --config webpack.prod.js",
