@@ -25,7 +25,7 @@ import {
   State,
   Action,
 } from '../reducer';
-import { ActionCreator } from '../../types';
+import { createActionCreator } from '../../utils/redux';
 
 
 /* types */
@@ -40,6 +40,7 @@ export type ItemsAction = FetchItemsAction
 export interface ItemsState {
   status: Status
   data?: Item[]
+  error?: string
 }
 
 
@@ -58,23 +59,15 @@ export const FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS';
 export const FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR';
 
 
+/* action creators */
+export const fetchItems = createActionCreator<{ query: string }, typeof FETCH_ITEMS>(FETCH_ITEMS);
 export type FetchItemsAction = ReturnType<typeof fetchItems>
-export const fetchItems: ActionCreator<
-  typeof FETCH_ITEMS,
-  { query: string }
-> = (props): FetchItemsAction => ({ type: FETCH_ITEMS, props });
 
+export const fetchItemsSuccess = createActionCreator<{ query: string, items: Item[] }, typeof FETCH_ITEMS_SUCCESS>(FETCH_ITEMS_SUCCESS);
 export type FetchItemsSuccessAction = ReturnType<typeof fetchItemsSuccess>
-export const fetchItemsSuccess: ActionCreator<
-  typeof FETCH_ITEMS_SUCCESS,
-  { query: string, items: Item[] }
-> = (props): FetchItemsSuccessAction => ({ type: FETCH_ITEMS_SUCCESS, props });
 
+export const fetchItemsError = createActionCreator<{ query: string, error: string }, typeof FETCH_ITEMS_ERROR>(FETCH_ITEMS_ERROR);
 export type FetchItemsErrorAction = ReturnType<typeof fetchItemsError>
-export const fetchItemsError: ActionCreator<
-  typeof FETCH_ITEMS_ERROR,
-  { query: string, error: string }
-> = (props): FetchItemsErrorAction => ({ type: FETCH_ITEMS_ERROR, props });
 
 
 /* reducer */
@@ -89,10 +82,13 @@ const reducer: Reducer<ItemsState, Action> = (
   } else if (action.type === FETCH_ITEMS_SUCCESS) {
     return pipe(
       assoc('status', 'complete' as Status),
-      assoc('data', action.props.items),
+      assoc('data', action.items),
     )(state);
   } else if (action.type === FETCH_ITEMS_ERROR) {
-    return assoc('status', 'error', state);
+    return pipe(
+      assoc('status', 'error' as Status),
+      assoc('error', action.error),
+    )(state);
   }
 
   return state;
@@ -104,7 +100,7 @@ export default reducer;
 /* epics */
 export const noopEpic: Epic<Action, Action, State> = (action$) => action$.pipe(
   ofType<Action, FetchItemsAction>(FETCH_ITEMS),
-  switchMap(({ props: { query } }) => (
+  switchMap(({ query }) => (
     of([{ id: '1', title: 'thing1' }, { id: '2', title: 'thing2' }]).pipe(
       delay(1000),
       map((items) => fetchItemsSuccess({ query, items })),

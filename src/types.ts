@@ -2,8 +2,7 @@ import { Action } from "redux";
 
 
 /* redux */
-export type ActionWithProps<Type, Props> = Action<Type> & { props: Props }
-export type ActionCreator<Type, Props> = (props: Props) => ActionWithProps<Type, Props>
+export type ActionCreator<Type extends string, Props extends object> = (props: Props) => Action<Type> & Props
 
 
 /* misc */
