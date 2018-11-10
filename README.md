@@ -22,4 +22,5 @@ npm run dev
 
 ```bash
 npm run validate
+npm run build
 ```
