@@ -18,8 +18,11 @@
     "lint": "tslint --config ./tslint.json --project ./tsconfig.json --format stylish",
     "tsc": "tsc --project ./tsconfig.json",
     "test": "node test/",
-    "build": "webpack --mode production --config webpack.prod.js --progress",
-    "validate": "npm run test && npm run lint && npm run build"
+    "validate": "npm run test && npm run lint",
+    "build": "webpack --mode production --config webpack.prod.js",
+    "deploy:patch": "npm run validate && npm run build && npm version patch && git push --follow-tags",
+    "deploy:minor": "npm run validate && npm run build && npm version minor && git push --follow-tags",
+    "deploy:major": "npm run validate && npm run build && npm version major && git push --follow-tags"
   },
   "author": "James Conkling <james.lane.conkling@gmail.com> jameslaneconkling.github.io",
   "license": "ISC",
