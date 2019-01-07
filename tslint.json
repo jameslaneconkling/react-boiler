@@ -12,7 +12,8 @@
     "no-unused-expression": true,
     "member-ordering": false,
     "no-empty": false,
-    "variable-name": [true, "ban-keywords", "allow-leading-underscore", "allow-pascal-case"]
+    "variable-name": [true, "ban-keywords", "allow-leading-underscore", "allow-pascal-case"],
+    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-module", "check-separator", "check-rest-spread", "check-type", "check-typecast", "check-type-operator", "check-preblock", "check-postbrace"]
   },
   "rulesDirectory": []
 }
