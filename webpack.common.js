@@ -8,7 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: [
-    'babel-polyfill',
+    '@babel/polyfill',
     './src/index.tsx',
   ],
 

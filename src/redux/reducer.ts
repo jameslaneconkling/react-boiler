@@ -1,7 +1,8 @@
 import {
   combineReducers,
 } from 'redux';
-import { RouterState } from 'connected-react-router';
+import { connectRouter, RouterState } from 'connected-react-router';
+import { History } from 'history';
 import items, {
   ItemsState,
   ItemsAction,
@@ -16,6 +17,7 @@ export type State = {
 export type Action = ItemsAction;
 
 
-export default combineReducers({
+export default (history: History) => combineReducers({
+  router: connectRouter(history),
   items,
 });

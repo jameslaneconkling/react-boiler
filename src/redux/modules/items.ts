@@ -29,7 +29,7 @@ import { createActionCreator } from '../../utils/redux';
 
 
 /* types */
-export interface Item {
+export type Item = {
   id: string
   title: string
 }
@@ -37,7 +37,7 @@ export type Status = 'complete' | 'error' | 'pending'
 export type ItemsAction = FetchItemsAction
   | FetchItemsSuccessAction
   | FetchItemsErrorAction
-export interface ItemsState {
+export type ItemsState = {
   status: Status
   data?: Item[]
   error?: string
@@ -81,12 +81,12 @@ const reducer: Reducer<ItemsState, Action> = (
     return assoc('status', 'pending', state);
   } else if (action.type === FETCH_ITEMS_SUCCESS) {
     return pipe(
-      assoc('status', 'complete' as Status),
+      assoc('status', 'complete'),
       assoc('data', action.items),
     )(state);
   } else if (action.type === FETCH_ITEMS_ERROR) {
     return pipe(
-      assoc('status', 'error' as Status),
+      assoc('status', 'error'),
       assoc('error', action.error),
     )(state);
   }

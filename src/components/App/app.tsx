@@ -1,5 +1,4 @@
 import React, { SFC } from 'react';
-import { hot } from 'react-hot-loader';
 import { Props } from '../../containers/AppContainer';
 import {
   add,
@@ -16,4 +15,4 @@ const App: SFC<Props> = () => (
 );
 
 
-export default hot(module)(App);
+export default App;
