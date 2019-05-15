@@ -10,8 +10,8 @@ import items, {
 
 
 export type State = {
-  items: ItemsState;
-  routing: RouterState;
+  router: RouterState
+  items: ItemsState
 }
 
 export type Action = ItemsAction;
