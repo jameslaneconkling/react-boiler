@@ -27,7 +27,7 @@
   "author": "James Conkling <james.lane.conkling@gmail.com> jameslaneconkling.github.io",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.4.3",
+    "@babel/core": "^7.5.4",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
     "@babel/polyfill": "^7.4.3",
@@ -48,10 +48,10 @@
     "csp-html-webpack-plugin": "^3.0.1",
     "css-loader": "^2.1.1",
     "file-loader": "^3.0.1",
-    "html-webpack-plugin": "^3.2.0",
     "hoist-non-react-statics": "^3.3.0",
+    "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.6.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "tap-summary": "^4.0.0",
@@ -64,7 +64,7 @@
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "connected-react-router": "^6.4.0",
