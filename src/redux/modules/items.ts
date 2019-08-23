@@ -4,28 +4,28 @@ import {
   find,
   equals,
   pathOr,
-} from 'ramda';
+} from 'ramda'
 import {
   Reducer,
-} from 'redux';
+} from 'redux'
 import {
   Epic,
   ofType,
-} from 'redux-observable';
+} from 'redux-observable'
 import {
   of,
-} from 'rxjs';
+} from 'rxjs'
 import {
   switchMap,
   map,
   catchError,
   delay,
-} from 'rxjs/operators';
+} from 'rxjs/operators'
 import {
   State,
   Action,
-} from '../reducer';
-import { createActionCreator } from '../../utils/redux';
+} from '../reducer'
+import { createActionCreator } from '../../utils/redux'
 
 
 /* types */
@@ -50,23 +50,23 @@ type Selector<S, T> = (state: S, ...params: any[]) => T
 export const getItem: Selector<State, Item | undefined> = (state, id) => pipe(
   pathOr([], ['items', 'data']),
   find(equals(id))
-)(state);
+)(state)
 
 
 /* constants */
-export const FETCH_ITEMS = 'FETCH_ITEMS';
-export const FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS';
-export const FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR';
+export const FETCH_ITEMS = 'FETCH_ITEMS'
+export const FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS'
+export const FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR'
 
 
 /* action creators */
-export const fetchItems = createActionCreator<{ query: string }, typeof FETCH_ITEMS>(FETCH_ITEMS);
+export const fetchItems = createActionCreator<{ query: string }, typeof FETCH_ITEMS>(FETCH_ITEMS)
 export type FetchItemsAction = ReturnType<typeof fetchItems>
 
-export const fetchItemsSuccess = createActionCreator<{ query: string, items: Item[] }, typeof FETCH_ITEMS_SUCCESS>(FETCH_ITEMS_SUCCESS);
+export const fetchItemsSuccess = createActionCreator<{ query: string, items: Item[] }, typeof FETCH_ITEMS_SUCCESS>(FETCH_ITEMS_SUCCESS)
 export type FetchItemsSuccessAction = ReturnType<typeof fetchItemsSuccess>
 
-export const fetchItemsError = createActionCreator<{ query: string, error: string }, typeof FETCH_ITEMS_ERROR>(FETCH_ITEMS_ERROR);
+export const fetchItemsError = createActionCreator<{ query: string, error: string }, typeof FETCH_ITEMS_ERROR>(FETCH_ITEMS_ERROR)
 export type FetchItemsErrorAction = ReturnType<typeof fetchItemsError>
 
 
@@ -78,23 +78,23 @@ const reducer: Reducer<ItemsState, Action> = (
   action
 ) => {
   if (action.type === FETCH_ITEMS) {
-    return assoc('status', 'pending', state);
+    return assoc('status', 'pending', state)
   } else if (action.type === FETCH_ITEMS_SUCCESS) {
     return pipe(
       assoc('status', 'complete'),
       assoc('data', action.items),
-    )(state);
+    )(state)
   } else if (action.type === FETCH_ITEMS_ERROR) {
     return pipe(
       assoc('status', 'error'),
       assoc('error', action.error),
-    )(state);
+    )(state)
   }
 
-  return state;
-};
+  return state
+}
 
-export default reducer;
+export default reducer
 
 
 /* epics */
@@ -107,4 +107,4 @@ export const noopEpic: Epic<Action, Action, State> = (action$) => action$.pipe(
       catchError((error) => of(fetchItemsError({ query, error })))
     )
   ))
-);
+)

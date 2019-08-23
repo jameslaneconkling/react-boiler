@@ -1,7 +1,7 @@
-import test from 'tape';
+import test from 'tape'
 
 
 test('Stub', (assert) => {
-  assert.plan(1);
-  assert.equal(1, 1);
-});
+  assert.plan(1)
+  assert.equal(1, 1)
+})

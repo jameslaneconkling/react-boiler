@@ -2,4 +2,4 @@ interface Window {
   [key: string]: any
 }
 
-declare var window: Window;
+declare var window: Window

@@ -2,25 +2,25 @@ import {
   createStore,
   applyMiddleware,
   compose,
-} from 'redux';
-import { createBrowserHistory } from 'history';
-import { routerMiddleware } from 'connected-react-router';
+} from 'redux'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware } from 'connected-react-router'
 import {
   createEpicMiddleware,
-} from 'redux-observable';
-import reducer, { Action, State } from './reducer';
-import epic from './epic';
+} from 'redux-observable'
+import reducer, { Action, State } from './reducer'
+import epic from './epic'
 
 
 export const history = (() => {
   if (window.__history === undefined) {
-    window.__history = createBrowserHistory();
+    window.__history = createBrowserHistory()
   }
-  return window.__history;
-})();
-const epicMiddleware = createEpicMiddleware<Action, Action, State>();
+  return window.__history
+})()
+const epicMiddleware = createEpicMiddleware<Action, Action, State>()
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 
 const store = createStore(
@@ -31,12 +31,12 @@ const store = createStore(
       routerMiddleware(history)
     ),
   )
-);
+)
 
-epicMiddleware.run(epic);
+epicMiddleware.run(epic)
 
 if (process.env.NODE_ENV === 'development') {
-  window.store = store;
+  window.store = store
 }
 
-export default store;
+export default store

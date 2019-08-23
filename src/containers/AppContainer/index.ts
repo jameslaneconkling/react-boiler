@@ -1,1 +1,1 @@
-export { default, Props } from './appContainer';
+export { default, Props } from './appContainer'
